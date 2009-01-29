@@ -1,0 +1,220 @@
+<html>
+<head>
+<title>MACRO 3.0 Data Transfer Test Harness</title>
+<meta name="GENERATOR" Content="Microsoft Visual Studio .NET 7.1">
+</head>
+<body>
+<h1>MACRO 3.0 Data Transfer Test Harness</h1>
+
+<form name=ftest1 action="check_system_messages.asp" method=post ID="Form1">
+site:<input type=text value="s1" name=site ID="Text1">(site)<br>
+username:<input type=text value="rde" name=username ID="Text2">(username)<br>
+<input type=button value="check_system_messages.asp" onclick="document.ftest1.submit()" ID="Button1" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest2 action="DataIntegrityCheck.asp" method=get ID="Form2">
+divtype:<select name="divtype"><option value="MIMessage" selected>MIMessage</option><option value="History">History</option></select><br>
+site:<input type=text value="s1" name=sitename ID="Text3">(site)<br>
+username:<input type=text value="rde" name=userid ID="Text4">(username)<br>
+dividzero:<input type=text value="0" name=dividzero ID="Text5">(num)<br>
+dividone:<input type=text value="0" name=dividone ID="Text6">(num)<br>
+countidzero:<input type=text value="0" name=countidzero ID="Text7">(num)<br>
+countidone:<input type=text value="0" name=countidone ID="Text8">(num)<br>
+divsubject:<input type=text value="0" name=divsubject ID="Text9">(num)<br>
+maxtimestamp:<input type=text value="0" name=maxtimestamp ID="Text10">(num)<br>
+subjectcount:<input type=text value="0" name=subjectcount ID="Text11">(num)<br>
+<input type=button value="DataIntegrityCheck.asp" onclick="document.ftest2.submit()" ID="Button2" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest3 action="exchange_download_info.asp" method=get ID="Form3">
+site:<input type=text value="s1" name=site ID="Text12">(site)<br>
+<input type=button value="exchange_download_info.asp" onclick="document.ftest3.submit()" ID="Button3" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest4 action="exchange_get_next_lfmessage.asp" method=get ID="Form4">
+site:<input type=text value="s1" name=site ID="Text13">(site)<br>
+PreviousMessageID:<input type=text value="0" name=PreviousMessageID ID="Text14">(num)<br>
+PreviousMessageSent:<input type=text value="0" name=PreviousMessageSent ID="Text15">(num)<br>
+PreviousMessageSentTZ:<input type=text value="0" name=PreviousMessageSentTZ ID="Text16">(num)<br>
+<input type=button value="exchange_get_next_lfmessage.asp" onclick="document.ftest4.submit()" ID="Button4" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest5 action="exchange_get_next_message.asp" method=get ID="Form5">
+site:<input type=text value="s1" name=site ID="Text17">(site)<br>
+PreviousMessageID:<input type=text value="0" name=PreviousMessageID ID="Text18">(num)<br>
+<input type=button value="exchange_get_next_message.asp" onclick="document.ftest5.submit()" ID="Button5" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest6 action="exchange_get_next_mimessage.asp" method=get ID="Form6">
+site:<input type=text value="s1" name=site ID="Text19">(site)<br>
+PreviousMessageID:<input type=text value="0" name=PreviousMessageID ID="Text20">(num)<br>
+PreviousMessageSent:<input type=text value="0" name=PreviousMessageSent ID="Text21">(num)<br>
+<input type=button value="exchange_get_next_mimessage.asp" onclick="document.ftest6.submit()" ID="Button6" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest7 action="exchange_get_study_definition.asp" method=get ID="Form7">
+clinicaltrialid:<input type=text value="0" name=clinicaltrialid ID="Text22">(num)<br>
+<input type=button value="exchange_get_study_definition.asp" onclick="document.ftest7.submit()" ID="Button7" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest8 action="exchange_lfmessage_list.asp" method=get ID="Form8">
+site:<input type=text value="s1" name=site ID="Text23">(site)<br>
+<input type=button value="exchange_lfmessage_list.asp" onclick="document.ftest8.submit()" ID="Button8" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest9 action="exchange_message_list.asp" method=get ID="Form9">
+site:<input type=text value="s1" name=site ID="Text24">(site)<br>
+<input type=button value="exchange_message_list.asp" onclick="document.ftest9.submit()" ID="Button9" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest10 action="exchange_mimessage_list.asp" method=get ID="Form10">
+site:<input type=text value="s1" name=site ID="Text25">(site)<br>
+<input type=button value="exchange_mimessage_list.asp" onclick="document.ftest10.submit()" ID="Button10" NAME="Button1">
+</form>
+<hr>
+
+<form name=ftest11 action="exchange_receive_data.asp" method=post ID="Form11">
+filename:<input type=text value="ian.txt" name=filename ID="Text26">(filename)<br>
+site:<input type=text value="s1" name=site ID="Text27">(site)<br>
+trialname:<input type=text value="demostudy" name=trialname ID="Text28">(study)<br>
+subjectid:<input type=text value="1" name=subjectid ID="Text29">(num)<br>
+lastlfmessageid:<input type=text value="0" name=lastlfmessageid ID="Text30">(num)<br>
+<input type=button value="exchange_receive_data.asp" onclick="document.ftest11.submit()" ID="Button11" NAME="Button11">
+</form>
+<hr>
+
+<form name=ftest12 action="exchange_receive_data1.asp" method=post ID="Form12">
+filename:<input type=text value="ian.txt" name=filename ID="Text31">(filename)<br>
+<input type=button value="exchange_receive_data1.asp" onclick="document.ftest12.submit()" ID="Button12" NAME="Button11">
+</form>
+<hr>
+
+<form name=ftest13 action="exchange_receive_data2.asp" method=post ID="Form13">
+filename:<input type=text value="ian.txt" name=filename ID="Text32">(filename)<br>
+<input type=button value="exchange_receive_data2.asp" onclick="document.ftest13.submit()" ID="Button13" NAME="Button11">
+</form>
+<hr>
+
+<form name=ftest14 action="exchange_receive_data3.asp" method=post ID="Form14">
+filename:<input type=text value="ian.txt" name=filename ID="Text33">(filename)<br>
+site:<input type=text value="s1" name=site ID="Text34">(site)<br>
+trialname:<input type=text value="demostudy" name=trialname ID="Text35">(study)<br>
+subjectid:<input type=text value="1" name=subjectid ID="Text36">(num)<br>
+lastlfmessageid:<input type=text value="0" name=lastlfmessageid ID="Text37">(num)<br>
+<input type=button value="exchange_receive_data3.asp" onclick="document.ftest14.submit()" ID="Button14" NAME="Button11">
+</form>
+<hr>
+
+<form name=ftest15 action="exchange_receive_Laboratory.asp" method=post ID="Form15">
+filename:<input type=text value="ian.txt" name=filename ID="Text38">(filename)<br>
+site:<input type=text value="s1" name=site ID="Text39">(site)<br>
+<input type=button value="exchange_receive_Laboratory.asp" onclick="document.ftest15.submit()" ID="Button15" NAME="Button11">
+</form>
+<hr>
+
+<form name=ftest16 action="exchange_receive_lfmessage.asp" method=post ID="Form16">
+id:<input type=text value="0" name=ID ID="Text41">(num)<br>
+trialname:<input type=text value="demostudy" name=trialname ID="Text48">(study)<br>
+site:<input type=text value="s1" name=site ID="Text40">(site)<br>
+personid:<input type=text value="1" name=personid ID="Text49">(num)<br>
+visitid:<input type=text value="1" name=visitid ID="Text50">(num)<br>
+visitcycle:<input type=text value="1" name=visitcycle ID="Text51">(num)<br>
+crfpageid:<input type=text value="1" name=crfpageid ID="Text53">(num)<br>
+crfpagecycle:<input type=text value="1" name=crfpagecycle ID="Text54">(num)<br>
+responsetaskid:<input type=text value="1" name=responsetaskid ID="Text57">(num)<br>
+responsecycle:<input type=text value="1" name=responsecycle ID="Text56">(num)<br>
+questionid:<input type=text value="1" name=questionid ID="Text71">(num)<br>
+source:<input type=text value="1" name=source ID="Text72">(num)<br>
+actiontype:<input type=text value="1" name=actiontype ID="Text73">(num)<br>
+scope:<input type=text value="1" name=scope ID="Text74">(num)<br>
+username:<input type=text value="rde" name=username ID="Text66">(username)<br>
+usernamefull:<input type=text value="rde" name=usernamefull ID="Text67">*<br>
+rollbacksource:<input type=text value="0" name=rollbacksource ID="Text75">(num)<br>
+rollbackmessageid:<input type=text value="0" name=rollbackmessageid ID="Text76">(num)<br>
+msgtimestamp:<input type=text value="0" name=msgtimestamp ID="Text77">(num)<br>
+msgtimestamptz:<input type=text value="0" name=msgtimestamptz ID="Text78">(num)<br>
+senttimestamp:<input type=text value="0" name=senttimestamp ID="Text79">(num)<br>
+senttimestamptz:<input type=text value="0" name=senttimestamptz ID="Text80">(num)<br>
+<input type=button value="exchange_receive_lfmessage.asp" onclick="document.ftest16.submit()" ID="Button16" NAME="Button16">
+</form>
+<hr>
+
+<form name=ftest17 action="exchange_receive_mimessage.asp" method=post ID="Form17">
+site:<input type=text value="s1" name=site ID="Text42">(site)<br>
+mimessageid:<input type=text value="1" name=ID ID="Text43">(num)<br>
+mimessagesource:<input type=text value="1" name=source ID="Text44">(num)<br>
+mimessagetype:<input type=text value="1" name=type ID="Text45">(num)<br>
+mimessagescope:<input type=text value="1" name=scope ID="Text46">(num)<br>
+mimessageobjectid:<input type=text value="1" name=objectid ID="Text47">(num)<br>
+mimessageobjectsource:<input type=text value="1" name=objectsource ID="Text52">(num)<br>
+mimessagepriority:<input type=text value="1" name=priority ID="Text55">(num)<br>
+trialname:<input type=text value="demostudy" name=trialname ID="Text58">(study)<br>
+personid:<input type=text value="1" name=personid ID="Text59">(num)<br>
+visitid:<input type=text value="1" name=visitid ID="Text60">(num)<br>
+visitcycle:<input type=text value="1" name=visitcycle ID="Text61">(num)<br>
+crfpagetaskid:<input type=text value="1" name=crfpagetaskid ID="Text62">(num)<br>
+crfpageid:<input type=text value="1" name=crfpageid ID="Text63">(num)<br>
+crfpagecycle:<input type=text value="1" name=crfpagecycle ID="Text64">(num)<br>
+dataitemid:<input type=text value="1" name=dataitemid ID="Text65">(num)<br>
+responsecycle:<input type=text value="1" name=responsecycle ID="Text68">(num)<br>
+responsetaskid:<input type=text value="1" name=responsetaskid ID="Text69">(num)<br>
+responsevalue:<input type=text value="tangerine" name=responsevalue ID="Text70">*<br>
+ocdiscrepancyid:<input type=text value="0" name=ocdiscrepancyid ID="Text81">(num)<br>
+created:<input type=text value="0" name=created ID="Text82">(num)<br>
+sent:<input type=text value="0" name=sent ID="Text83">(num)<br>
+received:<input type=text value="0" name=received ID="Text84">(num)<br>
+history:<input type=text value="0" name=history ID="Text85">(num)<br>
+processed:<input type=text value="0" disabled name=processed ID="Text86">(num)<br>
+status:<input type=text value="0" name=status ID="Text87">(num)<br>
+text:<input type=text value="guava" name=text ID="Text102">*<br>
+username:<input type=text value="rde" name=username ID="Text88">(username)<br>
+usernamefull:<input type=text value="rde" name=usernamefull ID="Text89">*<br>
+responsetimestamp:<input type=text value="0" name=responsetimestamp ID="Text90">(num)<br>
+created_tz:<input type=text value="0" name=created_tz ID="Text91">(num)<br>
+sent_tz:<input type=text value="0" name=sent_tz ID="Text92">(num)<br>
+<input type=button value="exchange_receive_mimessage.asp" onclick="document.ftest17.submit()" ID="Button17" NAME="Button17">
+</form>
+<hr>
+
+<form name=ftest18 action="forgotten_password.asp" method=post ID="Form18">
+site:<input type=text value="s1" name=site ID="Text93">(site)<br>
+username:<input type=text value="rde" name=username ID="Text94">(username)<br>
+password:<input type=text value="a" name=password ID="Text95">(password)<br>
+confirmationids:<input type=text value="" name=confirmationids ID="Text96">*<br>
+<input type=button value="forgotten_password.asp" onclick="document.ftest18.submit()" ID="Button18" NAME="Button18">
+</form>
+<hr>
+
+<form name=ftest19 action="get_report_files.asp" method=post ID="Form19">
+site:<input type=text value="s1" name=site ID="Text97">(site)<br>
+username:<input type=text value="rde" name=username ID="Text98">(username)<br>
+lasttrans:<input type=text value="0" name=lasttrans ID="Text99">(num)<br>
+confirm:<select name=confirm ID="Select1"><option value="">no</option><option value="1">yes</option></select><br>
+<input type=button value="get_report_files.asp" onclick="document.ftest19.submit()" ID="Button19" NAME="Button19">
+</form>
+<hr>
+
+<form name=ftest20 action="get_system_messages.asp" method=post ID="Form20">
+site:<input type=text value="s1" name=site ID="Text100">(site)<br>
+confirmationids:<input type=text value="" name=confirmationids ID="Text101">*<br>
+<input type=button value="get_system_messages.asp" onclick="document.ftest20.submit()" ID="Button20" NAME="Button20">
+</form>
+<hr>
+
+<form name=ftest21 action="System_Message_List.asp" method=post>
+site:<input type=text value="s1" name=site>(site)<br>
+<input type=button value="system_message_list.asp" onclick="document.ftest21.submit()">
+</form>
+<hr>
+
+</body>
+</html>

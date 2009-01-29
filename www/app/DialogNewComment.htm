@@ -1,0 +1,116 @@
+<head>
+<title>New Comment</title>
+<link rel='stylesheet' href='../style/MACRO1.css' type='text/css'>
+<script language="javascript">
+var sDel1="`";
+var undefined;
+function fnPageLoaded()
+{
+	var aArgs=window.dialogArguments;
+	fnSetCaption(aArgs[0]);
+	fnSetLabel("Please enter Comment text");
+	txtInput.focus();
+}
+function fnSetCaption(sCaption)
+{
+	document.all["divName"].innerHTML="<b>Name: "+sCaption+"</b>";
+}
+function fnSetLabel(sLabel)
+{
+	document.all["divLabel"].innerHTML=sLabel;
+}
+function fnGetTimestamp()
+{
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth()+1;
+	var date = today.getDate();
+	var day = today.getDay();
+	var hour = today.getHours();
+	var minute = today.getMinutes();
+	var second = today.getSeconds();
+	var dateTime;
+	
+	dateTime= year + "/" + fnPadDate(month) + "/" + fnPadDate(date) + " ";
+	dateTime+=((hour <10)? "0":"") + hour;
+	dateTime+=((minute < 10) ? ":0" : ":") + minute;
+	dateTime+=((second < 10) ? ":0" : ":") + second;
+
+	return dateTime;
+}
+function fnPadDate(sStr)
+{
+	var sDate=""+sStr;
+	if (sDate.length<2) sDate="0"+sDate;
+	return sDate;
+}
+function fnSubmit()
+{
+	var aArgs=window.dialogArguments;
+	var sUserName=aArgs[2];	
+	var sStr=txtInput.value;
+	
+	var s="yyyy/mm/dd hh:mm:ss|*User: |*|*"+sUserName;
+	var nLength=aArgs[1]+s.length;
+
+	var sRtn="";
+
+	if (sStr!="")
+	{
+		if (!fnIllegalChars(sStr))
+		{
+			if (fnLength(sStr,(255-nLength)))
+			{					
+				sRtn=fnGetTimestamp()+"|User: "+sUserName+"|"+sStr+"|";
+			}
+			else
+			{
+				alert("The total length of comments cannot exceed 255 characters (including timestamp and user details)")
+				txtComment.select();
+				return;
+			}
+		}
+		else
+		{
+			alert("Comments cannot contain the following characters: `|~\"");
+			txtComment.select();
+			return;
+		}
+	}
+	fnReturn(sRtn);
+}
+function fnIllegalChars(sStr)
+{
+	var sPattern = /[`|~"]/;
+	return sPattern.exec(sStr);
+}	
+function fnLength(sStr,nLength)
+{
+	if (sStr.length>nLength) return false;
+	return true;
+}
+function fnReturn(sVal)
+{
+	this.returnValue=sVal;
+	this.close();
+}
+</script>
+</head>
+<body onload='fnPageLoaded();'><table align='center' width='95%' border='0'>
+<tr height='10'><td></td></tr>
+<tr height='15' class='clsLabelText'><td colspan='2'>
+<div id='divName'>name</div>
+</td>
+<td><a style='cursor:hand;' onclick='javascript:fnSubmit();'><u>OK</u></a></td>
+<td><a style='cursor:hand;' onclick='javascript:fnReturn("");'><u>Cancel</u></a></td>
+</tr>
+<tr height='15'><td></td></tr>
+<tr height='5'><td></td></tr>
+<tr height='30'><td colspan='4' class='clsLabelText'>
+<div id='divLabel'>label</div></td></tr>
+<tr height='5'><td></td></tr>
+<tr><td width='100' class='clsLabelText'></td>
+<td><input type='text' class='clsTextbox' name="txtInput" maxLength='255' size='50'></td>
+</tr>
+</table>
+</body></html>

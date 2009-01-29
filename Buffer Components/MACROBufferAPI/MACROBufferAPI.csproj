@@ -1,0 +1,239 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{82907DBC-D387-46C6-B733-BC83B8F10B62}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "MACROBufferAPI"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "MACROBufferAPI"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\Debug\"
+                    RegisterForComInterop = "true"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\Release\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "log4net"
+                    AssemblyName = "log4net"
+                    HintPath = "..\..\..\..\Program Files\log4net-1.2.9-beta\bin\net\1.1\release\log4net.dll"
+                />
+                <Reference
+                    Name = "XceedEncryptionLib"
+                    Guid = "{55A560A7-E3F9-4790-8D22-F3A97009AC8F}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "XceedZipLib"
+                    Guid = "{DB797681-40E0-11D2-9BD5-0060082AE372}"
+                    VersionMajor = "4"
+                    VersionMinor = "5"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "IMEDDataAccess"
+                    AssemblyName = "IMEDDataAccess"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDDataAccess\bin\Debug\IMEDDataAccess.dll"
+                />
+                <Reference
+                    Name = "System.Data.OracleClient"
+                    AssemblyName = "System.Data.OracleClient"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.OracleClient.dll"
+                />
+                <Reference
+                    Name = "MACROAPI"
+                    AssemblyName = "MACROAPI"
+                    HintPath = "..\..\dotnetapi\bin\Release\MACROAPI.dll"
+                />
+                <Reference
+                    Name = "IMEDFunctions20"
+                    AssemblyName = "IMEDFunctions20"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDFunctions20\bin\Release\IMEDFunctions20.dll"
+                />
+                <Reference
+                    Name = "IMEDSettings20"
+                    AssemblyName = "IMEDSettings20"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDSettings20\bin\Release\IMEDSettings20.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferAPI.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferBasicChecks.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferMessageXML.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferResponseDb.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CategoryItem.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMACROBufferAPI.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMEDEncryption.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MACROBufferAPI.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MACROCommit.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResponseDataItem.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ResponseDetails.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "StudyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "SubjectData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "SubjectDetails.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Database Scripts\Drop_tables_SQLServer.sql"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Database Scripts\MSSQL Buffer API tables.sql"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Database Scripts\ORA Buffer API Tables.sql"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Installation Files\log4netconfig.xml"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Installation Files\MACROSettings30.txt"
+                    BuildAction = "Content"
+                />
+                <File
+                    RelPath = "Setup\MACROBufferAPISetup.sln"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Setup\Setup.vdproj"
+                    BuildAction = "None"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

@@ -1,0 +1,41 @@
+
+REM Specify Build Number
+MAJORVER 2
+MINORVER 0
+REVISION 3
+
+
+
+COMPATIBLE FALSE
+
+REM imed querydef
+PROJECT $/Macro/MACRO dependencies/imedquery
+PATH ..\..\MACRO Dependencies\IMEDQuery
+VBP IMEDQueryDef.vbp
+SET Description "IMED Query Definition"
+MAKE
+
+
+REM imed queryservices
+PROJECT $/Macro/MACRO dependencies/imedquery
+PATH ..\..\MACRO Dependencies\IMEDQuery
+VBP IMEDQueryServices.vbp
+SET Description "IMED Query Services"
+MAKE
+
+REM imed querydefsDS
+PROJECT $/Macro/MACRO dependencies/imedquery
+PATH ..\..\MACRO Dependencies\IMEDQuery
+VBP IMEDQueryDefsDS.vbp
+SET Description "IMED Query Definitions Data Services"
+MAKE
+
+REM imed querydefs
+PROJECT $/Macro/MACRO dependencies/imedquery
+PATH ..\..\MACRO Dependencies\IMEDQuery
+VBP IMEDQueryDefs.vbp
+SET Description "IMED Query Definition Business Services"
+MAKE
+
+
+

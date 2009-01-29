@@ -1,0 +1,513 @@
+A:hover
+{
+    TEXT-DECORATION: none
+}
+A
+{
+    COLOR: blue
+}
+A:visited
+{
+    COLOR: blue
+}
+BODY
+{
+    SCROLLBAR-FACE-COLOR: #e0e0ff;
+    MARGIN: 0px;
+    SCROLLBAR-HIGHLIGHT-COLOR: #e0e0ff;
+    SCROLLBAR-SHADOW-COLOR: #e0e0ff;
+    SCROLLBAR-3DLIGHT-COLOR: gray;
+    SCROLLBAR-ARROW-COLOR: gray;
+    SCROLLBAR-DARKSHADOW-COLOR: gray;
+    SCROLLBAR-BASE-COLOR: gray;
+    margin-width: 0px;
+    margin-height: 0px;
+}
+.clsMacroText
+{
+    FONT-WEIGHT: normal;
+    FONT-SIZE: 11pt;
+    COLOR: #000000;
+    FONT-FAMILY: arial,helvetica,verdana;
+}
+.clsUserNameText
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Verdana;
+    CURSOR: default;
+    COLOR: blue;
+}
+.clsSelectList
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsMSelectList
+{
+    FONT-SIZE: 8pt;
+    CURSOR: default;
+    FONT-FAMILY: verdana,arial,helvetica;
+    BACKGROUND-COLOR: #ffffff;
+    BORDER-RIGHT: gray 1px solid;
+    BORDER-TOP: gray 1px solid;
+    BORDER-LEFT: gray 1px solid;
+    BORDER-BOTTOM: gray 1px solid;
+    OVERFLOW: hidden;
+}
+.clsMSelectButton
+{
+    CURSOR: default;
+    BACKGROUND-COLOR: #d3d3d3;
+    BORDER-RIGHT: gray 1px solid;
+    BORDER-TOP: gray 1px solid;
+    BORDER-BOTTOM: gray 1px solid;
+}
+.clsMSelectPane
+{
+    BORDER-RIGHT: gray 1px solid;
+    CURSOR: default;
+    FONT-SIZE: 8pt;
+    LEFT: 4px;
+    VISIBILITY: hidden;
+    BORDER-LEFT: gray 1px solid;
+    WIDTH: 210px;
+    COLOR: blue;
+    BORDER-BOTTOM: gray 1px solid;
+    FONT-FAMILY: Verdana;
+    POSITION: absolute;
+    BACKGROUND-COLOR: #ffffff;
+}
+.clsButton
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsTextbox
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsLabelText
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsMenuLinkText
+{
+    FONT-SIZE: 8pt;
+    CURSOR: default;
+    COLOR: #a9a9a9;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsPopMenuLinkText
+{
+    FONT-SIZE: 8pt;
+    CURSOR: default;
+    COLOR: #a9a9a9;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsPopMenu
+{
+    BORDER-RIGHT: gray 1px solid;
+    BORDER-TOP: gray 1px solid;
+    Z-INDEX: 102;
+    VISIBILITY: hidden;
+    BORDER-LEFT: gray 1px solid;
+    BORDER-BOTTOM: gray 1px solid;
+    POSITION: absolute;
+    BACKGROUND-COLOR: #e0e0ff;
+}
+.clsCopyrightText
+{
+    FONT-SIZE: 7pt;
+    COLOR: #000000;
+    FONT-FAMILY: Verdana;
+}
+.clsTableHeaderText
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica;
+    BACKGROUND-COLOR: #e0e0ff;
+}
+.clsTableText
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsTableTextS
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+    BACKGROUND-COLOR: #f5f5f5;
+}
+.clsMenuHeader
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    LEFT: 4px;
+    WIDTH: 210px;
+    CURSOR: hand;
+    FONT-FAMILY: Verdana;
+    POSITION: absolute;
+    HEIGHT: 15px;
+}
+.clsMenuHeaderInactive
+{
+    COLOR: blue;
+    BACKGROUND-COLOR: #cecece;
+}
+.clsMenuHeaderActive
+{
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: blue;
+}
+.clsMenuPane
+{
+    BORDER-RIGHT: blue 1px solid;
+    FONT-SIZE: 8pt;
+    LEFT: 4px;
+    VISIBILITY: hidden;
+    BORDER-LEFT: blue 1px solid;
+    WIDTH: 210px;
+    COLOR: blue;
+    BORDER-BOTTOM: blue 1px solid;
+    FONT-FAMILY: Verdana;
+    POSITION: absolute;
+    BACKGROUND-COLOR: #ffffff;
+}
+.clsHoverButton
+{
+    BORDER-RIGHT: #aaaaaa 1px solid;
+    BORDER-TOP: #aaaaaa 1px solid;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    BORDER-LEFT: #aaaaaa 1px solid;
+    WIDTH: 64px;
+    BORDER-BOTTOM: #aaaaaa 1px solid;
+    FONT-FAMILY: Verdana;
+    HEIGHT: 12px;
+}
+.clsEformHoverButton
+{
+    BORDER-RIGHT: #aaaaaa 1px solid;
+    BORDER-TOP: #aaaaaa 1px solid;
+    FONT-SIZE: 8pt;
+    BORDER-LEFT: #aaaaaa 1px solid;
+    WIDTH: 160px;
+    BORDER-BOTTOM: #aaaaaa 1px solid;
+    FONT-FAMILY: Verdana;
+    HEIGHT: 12px;
+}
+.clsVisitHoverButton
+{
+    FONT-SIZE: 8pt;
+    FONT-FAMILY: Verdana;
+    HEIGHT: 30px;
+}
+.clsHoverButtonInactive
+{
+    CURSOR: hand;
+    COLOR: gray;
+    BACKGROUND-COLOR: #eeeeee;
+}
+.clsHoverButtonActive
+{
+    CURSOR: hand;
+    COLOR: blue;
+    BACKGROUND-COLOR: #ffffff;
+}
+.clsHoverButtonSelected
+{
+    CURSOR: default;
+    COLOR: black;
+    BACKGROUND-COLOR: #ffffff;
+}
+.clsHoverButtonDisabled
+{
+    CURSOR: default;
+    COLOR: #ffffff;
+    BACKGROUND-COLOR: #eeeeee;
+}
+.clsSDVPlanned
+{
+    BORDER-RIGHT: green 1px dotted;
+    BORDER-TOP: green 1px dotted;
+    BORDER-LEFT: green 1px dotted;
+    BORDER-BOTTOM: green 1px dotted;
+}
+.clsSDVCompleted
+{
+    BORDER-RIGHT: green 1px solid;
+    BORDER-TOP: green 1px solid;
+    BORDER-LEFT: green 1px solid;
+    BORDER-BOTTOM: green 1px solid;
+}
+.clsSDVQueried
+{
+    BORDER-RIGHT: red 2px dashed;
+    BORDER-TOP: red 2px dashed;
+    BORDER-LEFT: red 2px dashed;
+    BORDER-BOTTOM: red 2px dashed;
+}
+.clsErrorText
+{
+    FONT-SIZE: 9pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,sans-serif;
+}
+.clsMessageText
+{
+    FONT-SIZE: 9pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,sans-serif;
+}
+.clsProcessingMessageBox
+{
+    BORDER-RIGHT: gray 1px solid;
+    BORDER-TOP: gray 1px solid;
+    LEFT: 50px;
+    BORDER-LEFT: gray 1px solid;
+    WIDTH: 300px;
+    BORDER-BOTTOM: gray 1px solid;
+    POSITION: absolute;
+    TOP: 50px;
+    HEIGHT: 100px;
+    BACKGROUND-COLOR: #d3d3d3;
+}
+.clsScheduleHeadingText
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleMenuLinkText
+{
+    FONT-SIZE: 10pt;
+    CURSOR: default;
+    COLOR: #a9a9a9;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleBorder
+{
+    BACKGROUND-COLOR: #eeeeee;
+}
+.clsScheduleVisitText
+{
+    FONT-SIZE: 8pt;
+    COLOR: gray;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleEformText
+{
+    FONT-SIZE: 8pt;
+    COLOR: gray;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleVisitDateText
+{
+    FONT-SIZE: 7pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleEformLabelText
+{
+    FONT-SIZE: 7pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsScheduleEformBorder
+{
+    BORDER-RIGHT: #aaaaaa 1px solid;
+    BORDER-TOP: #aaaaaa 1px solid;
+    BORDER-LEFT: #aaaaaa 1px solid;
+    BORDER-BOTTOM: #aaaaaa 1px solid;
+}
+.clsMainBorderText
+{
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 8pt;
+    COLOR: #ffffff;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.LINK
+{
+    CURSOR: hand
+}
+.clsNRCTC
+{
+    BORDER-RIGHT: black 1px solid;
+    BORDER-TOP: black 1px solid;
+    FONT-WEIGHT: bold;
+    FONT-SIZE: 9pt;
+    BORDER-LEFT: black 1px solid;
+    COLOR: #000000;
+    BORDER-BOTTOM: black 1px solid;
+    FONT-FAMILY: verdana,arial,sans-serif;
+}
+.abs
+{
+    BORDER-WIDTH: 1;
+    BORDER-COLOR: red;
+    PADDING: 0;
+    MARGIN: 0;
+    POSITION: absolute;
+    Z-INDEX: 100;
+}
+.clsArezzoDecisionCaption
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12pt;
+    COLOR: #C7007D;
+    FONT-FAMILY: helvetica, arial;
+    TEXT-DECORATION: none;
+}
+.clsArezzoBestCandidateCaption
+{
+    PADDING-RIGHT: 0.5em;
+    PADDING-LEFT: 0.5em;
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 0.5em;
+    COLOR: purple;
+    PADDING-TOP: 0.5em;
+    FONT-FAMILY: helvetica,arial;
+    TEXT-DECORATION: none
+}
+.clsArezzoBestCandidateBorder
+{
+    BACKGROUND-COLOR:#F5C1D6;
+    BORDER-COLOR:#C7007D;
+    BORDER-STYLE:SOLID;
+    BORDER-WIDTH:3;
+    FONT-FAMILY: helvetica,arial;
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 15px;
+    COLOR: #C7007D;
+}
+.clsArezzoCandidateCaption
+{
+    PADDING-RIGHT: 0.5em;
+    PADDING-LEFT: 0.5em;
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12px;
+    PADDING-BOTTOM: 0.5em;
+    COLOR: #C7007D;
+    PADDING-TOP: 0.5em;
+    FONT-FAMILY: helvetica,arial;
+    TEXT-DECORATION: none
+}
+.clsArezzoArgCaption
+{
+    FONT-SIZE: 8pt;
+    COLOR: #5C145E;
+    FONT-FAMILY: helvetica,arial;
+    FONT-WEIGHT: bold;
+    POSITION: relative;
+    TEXT-DECORATION: none;
+}
+.clsArezzoArg
+{
+    FONT-SIZE: 8pt;
+    COLOR: #5C145E;
+    FONT-FAMILY: helvetica,arial;
+    POSITION: relative;
+    TEXT-DECORATION: none;
+}
+.clsArezzoActionCaption
+{
+    FONT-WEIGHT: bolder;
+    FONT-SIZE: 12pt;
+    PADDING-BOTTOM: 0.2em;
+    COLOR: #C7007D;
+    FONT-FAMILY: helvetica, arial;
+    TEXT-DECORATION: none
+}
+.clsArezzoActionProcedure
+{
+    FONT-SIZE: 10pt;
+    COLOR: #5C145E;
+    FONT-FAMILY: helvetica, arial;
+    TEXT-DECORATION: none
+}
+.clsArezzoPlanCaption
+{
+    FONT-SIZE: 12pt;
+    FONT-WEIGHT: bold;
+    COLOR: #C7007D;
+    PADDING-TOP: 0.1em;
+    FONT-FAMILY: helvetica, arial
+}
+.clsArezzoPlanDescription
+{
+    FONT-SIZE: 10pt;
+    COLOR: #000000;
+    PADDING-TOP: 0.1em;
+    FONT-FAMILY: helvetica, arial
+}
+.clsArezzoReference
+{
+    FONT-SIZE: 8pt;
+    COLOR: blue;
+    FONT-FAMILY: helvetica,arial;
+    POSITION: relative;
+    TEXT-DECORATION: underlined;
+}
+.clsEformPrintHeadText
+{
+    FONT-SIZE: 9pt;
+    COLOR: #000000;
+    FONT-WEIGHT: bold;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsEformPrintText
+{
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana,arial,helvetica;
+}
+.clsArezzoPage
+{
+    BACKGROUND-COLOR: #CFCFCF;
+}
+.clsArezzoSpacer
+{
+    BACKGROUND-COLOR: #000000;	
+}
+.clsArezzoPrint
+{
+    FONT-SIZE: 10pt;
+    COLOR: #000000;
+    PADDING-TOP: 0.1em;
+    FONT-FAMILY: helvetica, arial;
+    FONT-STYLE: italic;
+}
+.clsArezzoSubjectLabel
+{
+    FONT-SIZE: 10pt;
+    COLOR: #000000;
+    PADDING-TOP: 0.1em;
+    FONT-FAMILY: helvetica, arial;
+    FONT-WEIGHT: bold;
+}
+.clsArezzoRefFrame
+{
+   HEIGHT: 100;
+   WIDTH: 100%;
+   VISIBILITY: visible;
+   BORDER-LEFT: #C7007D 1px solid;
+   BORDER-RIGHT: #C7007D 1px solid;
+   BORDER-TOP: #C7007D 1px solid;
+   BORDER-BOTTOM: #C7007D 1px solid;
+}
+.clsArezzoReferenceTitle
+{
+    FONT-SIZE: 10pt;
+    COLOR: #C7007D;
+    FONT-FAMILY: helvetica,arial;
+    FONT-STYLE: italic;
+}

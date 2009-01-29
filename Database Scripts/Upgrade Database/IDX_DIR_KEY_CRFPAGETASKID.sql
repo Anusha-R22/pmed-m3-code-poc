@@ -1,0 +1,2 @@
+-- index for eform pageturning performance that was included in patch 3.0.70
+CREATE INDEX IDX_DIR_KEY_CRFPAGETASKID ON DATAITEMRESPONSE  (CLINICALTRIALID, TRIALSITE, PERSONID, CRFPAGETASKID);

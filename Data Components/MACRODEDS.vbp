@@ -1,0 +1,52 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#C:\WINDOWS\system32\STDOLE2.TLB#OLE Automation
+Reference=*\G{2D2F1F08-8AED-44F1-8AC5-389D7F30089E}#1.0#0#C:\WINDOWS\system32\IMEDQD20.dll#IMED Query Definition v2.0.3
+Reference=*\G{A1FA8948-72A0-441E-84E8-64A71F238CE1}#1.0#0#C:\WINDOWS\system32\IMEDQS20.dll#IMED Query Services v2.0.3
+Reference=*\G{CC8B35B1-F9EF-4705-B31A-411CF3FAA874}#1.0#0#..\State Components\\MACRODEST30.dll#MACRO Data Entry State v3.0.82
+Reference=*\G{9E00D10E-00EF-4516-9F9B-D5E08AB087A0}#1.0#0#..\Business Components\\MACROVersion.dll#MACRO Version v3.0.82
+Class=StudySubjectDS; DE Source Code\StudySubjectDS.cls
+Module=libLibrary; DE Source Code\libLibrary.bas
+Module=modKeys; DE Source Code\modKeys.bas
+Class=StudyDefDS; DE Source Code\StudyDefDS.cls
+Startup="(None)"
+HelpFile=""
+Title="MACRODEDS30"
+ExeName32="MACRODEDS30.dll"
+Command32=""
+Name="MACRODEDS30"
+HelpContextID="0"
+Description="MACRO Data Entry Data Services v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="DE Source Code\COMP_MACRODEDS30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO Data Entry Data Services v3.0.82"
+VersionCompanyName="InferMed Ltd"
+VersionFileDescription="MACRO Data Entry Data Services v3.0.82"
+VersionLegalCopyright="Copyright InferMed Ltd 2002 All Rights Reserved"
+VersionProductName="MACRO"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

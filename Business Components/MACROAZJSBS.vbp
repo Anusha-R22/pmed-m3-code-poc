@@ -1,0 +1,61 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\WINNT\system32\STDOLE2.TLB#OLE Automation
+Reference=*\G{AC91D735-04ED-4C67-B676-2B8C63DDEEA4}#1.0#0#..\..\..\WINNT\system32\IMedALM5.dll#IMedALM5 v5.0.1
+Class=AzTerm; AzToJS Source Code\AzTerm.cls
+Class=AzToJavaScript; AzToJS Source Code\AzToJavaScript.cls
+Startup="(None)"
+HelpFile=""
+Title="MACROAZJSBS30"
+ExeName32="MACROAZJSBS30.dll"
+Command32=""
+Name="MACROAZJSBS30"
+HelpContextID="0"
+Description="MACRO Arezzo to JavaScript Conversion Business Services v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="AzToJS Source Code\COMP_MACROAZJSBS30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO Arezzo to JavaScript Conversion Business Services v3.0.82"
+VersionCompanyName="InferMed Ltd"
+VersionFileDescription="MACRO Arezzo to JavaScript Conversion Business Services v3.0.82"
+VersionLegalCopyright="Copyright InferMed Ltd 2001 All Rights Reserved"
+VersionProductName="MACRO"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

@@ -1,0 +1,61 @@
+TH
+{
+	background-color:#eeeeee;
+ 	FONT-SIZE: 8pt;
+    	COLOR: #000000;
+    	FONT-FAMILY: verdana, arial, helvetica;
+}
+TD
+{
+	
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica;
+}
+P
+{
+	
+    FONT-SIZE: 8pt;
+    COLOR: #000000;
+    FONT-FAMILY: verdana, arial, helvetica;
+}
+.ReportHeaderTable
+{
+	background-color:#eeeeee;
+ 	FONT-SIZE: 8pt;
+    	COLOR: #000000;
+    	FONT-FAMILY: verdana, arial, helvetica;
+}
+.ReportFooterTable
+{
+	background-color:#eeeeee;
+ 	FONT-SIZE: 8pt;
+    	COLOR: #000000;
+    	FONT-FAMILY: verdana, arial, helvetica;
+}
+.ReportHeaderTitle
+{
+	background-color:#eeeeee;
+ 	FONT-SIZE: 12pt;
+    	COLOR: #000000;
+    	FONT-FAMILY: verdana, arial, helvetica;
+			font-weight: bold;
+}
+.GroupHeader1
+{
+	background-color:#eeeeee;
+ 	FONT-SIZE: 10pt;
+    	COLOR: #000000;
+    	FONT-FAMILY: verdana, arial, helvetica;
+			font-weight: bold;
+			width:100%;
+}
+A
+{
+    COLOR: #0000ff;
+    TEXT-DECORATION: none
+}
+A:visited
+{
+    COLOR: #0000ff
+}

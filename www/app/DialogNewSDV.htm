@@ -1,0 +1,106 @@
+<head>
+<title>New SDV</title>
+<link rel='stylesheet' href='../style/MACRO1.css' type='text/css'>
+<script language="javascript">
+var sDel1="`";
+var undefined;
+function fnPageLoaded()
+{
+	var aArgs=window.dialogArguments;
+	fnSetCaption(aArgs[0]);
+	fnSetLabel("Please enter SDV text");
+	fnSetValue(aArgs[1]);
+	txtInput.focus();
+}
+function fnSetCaption(sCaption)
+{
+	document.all["divName"].innerHTML="<b>Name: "+sCaption+"</b>";
+}
+function fnSetLabel(sLabel)
+{
+	document.all["divLabel"].innerHTML=sLabel;
+}
+function fnSetValue(sValue)
+{
+	document.all["divValue"].innerHTML=(sValue!=undefined)? "<b>Value: "+sValue+"</b>":"<b>Value:</b>";
+}
+function fnSubmit()
+{
+	var aArgs=window.dialogArguments;
+	var sRtn="";
+	var sStr=txtInput.value;
+	var sStat="";
+
+	if (!fnIllegalChars(sStr))
+	{
+		if (fnLength(sStr,2000))
+		{
+			sRtn="s|"+sStr+"|";
+			for (var n=0;n<radStatus.length;n++)
+			{
+				if(radStatus[n].checked)
+				{
+					sStat=radStatus[n].value;
+				}
+			}
+						
+			sRtn+=sStat;
+		}
+		else
+		{
+			alert("SDV text cannot exceed 2000 characters in length")
+			txtInput.select();
+			return;
+		}
+	}
+	else
+	{
+		alert("SDVs cannot contain the following characters: `|~\"");
+		txtInput.select();
+		return;
+	}		
+	fnReturn(sRtn);
+}
+function fnIllegalChars(sStr)
+{
+	var sPattern = /[`|~"]/;
+	return sPattern.exec(sStr);
+}	
+function fnLength(sStr,nLength)
+{
+	if (sStr.length>nLength) return false;
+	return true;
+}
+function fnReturn(sVal)
+{
+	this.returnValue=sVal;
+	this.close();
+}
+</script>
+</head>
+<body onload='fnPageLoaded();'><table align='center' width='95%' border='0'>
+<tr height='10'><td></td></tr>
+<tr height='15' class='clsLabelText'><td colspan='2'>
+<table width='100%' cellpadding='0' cellspacing='0' border='0'>
+<tr class='clsLabelText'>
+<td><div id='divName'>name</div></td>
+<td><div id='divValue'>value</div></td>
+</tr>
+</table>
+</td>
+<td><a style='cursor:hand;' onclick='javascript:fnSubmit();'><u>OK</u></a></td>
+<td><a style='cursor:hand;' onclick='javascript:fnReturn("");'><u>Cancel</u></a></td>
+</tr>
+<tr height='15'><td></td></tr>
+<tr height='5'><td></td></tr>
+<tr height='30'><td colspan='4' class='clsLabelText'>
+<div id='divLabel'>label</div></td></tr>
+<tr height='5'><td></td></tr>
+<tr><td width='100' class='clsLabelText'></td>
+<td><textarea class='clsTextbox' cols=50 rows=5 name="txtInput" maxlength="255" wrap="physical"></TEXTAREA></td>
+</tr>
+<tr><td height='5'></td></tr>
+<tr><td colspan='2' class='clsLabelText'>
+<input type="radio" value="1" checked name="radStatus">Planned&nbsp;&nbsp;<input type="radio" value="2" name="radStatus">Queried&nbsp;&nbsp;<input type="radio" value="3" name="radStatus">Done
+</td></tr></table>
+</body></html>

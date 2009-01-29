@@ -1,0 +1,196 @@
+<html>
+<head>
+<title>Question Value</title>
+<link rel='stylesheet' href='../style/MACRO1.css' type='text/css'>
+<script language="javascript">
+function fnPageLoaded()
+{
+	var olArg=window.dialogArguments;
+	oQuestion=olArg[0];
+	nRepeat=olArg[1];
+	fnSetName(oQuestion.sCaptionText);
+	fnSetHeader(oQuestion.olRepeat[nRepeat].getFormatted(),oQuestion.olRepeat[nRepeat].nStatus,oQuestion.olRepeat[nRepeat].nLockStatus,oQuestion.olRepeat[nRepeat].nSDVStatus);
+	fnSetComment(oQuestion.olRepeat[nRepeat].sComments);
+	fnSetRFC(oQuestion.olRepeat[nRepeat].sRFC);
+}
+function fnSetName(sName)
+{
+	document.all["divName"].innerHTML="Question: "+sName;
+}
+function fnSetHeader(sValue,nStatus,nLock,nSDV)
+{
+	var sHtml ="<table width='100%' border='0'>";
+	sHtml+="<tr class='clsLabelText'>";
+	sHtml+="<td>Value:"+sValue+"</td>";
+	sHtml+="<td>"+fnRtnStatusImg(nStatus);
+	sHtml+=fnRtnLockImg(nLock)+"</td>";
+	sHtml+="<td>"+fnRtnSDV(nSDV)+"</td>";
+	sHtml+="</tr>";
+	sHtml+="</table>";
+	document.all["divHeader"].innerHTML=sHtml;
+}
+function fnSetComment(sC)
+{	
+	var aC=sC.split("|")
+	var sComment="";
+	for(n=3;n<aC.length-1;n++)sComment+=aC[n]+"|";
+	sComment=sComment.replace(/[|]/g,"<br>");
+	if (sComment!="")
+	{
+		var sHtml ="<table width='100%'>";
+		sHtml+="<tr height='15' class='clsTableHeaderText'>";
+		sHtml+="<td>Comments</td>";
+		sHtml+="</tr>"
+		sHtml+="<tr class='clsTableText'>";
+		sHtml+="<td>"+sComment+"</td>";
+		sHtml+="</tr>";
+		sHtml+="</table>";
+		document.all["divComment"].innerHTML=sHtml;
+	}
+}
+function fnSetRFC(sRFC)
+{
+	if (sRFC!="")
+	{
+		var sHtml ="<table width='100%'>";
+		sHtml+="<tr height='15' class='clsTableHeaderText'>";
+		sHtml+="<td>Reason for change</td>";
+		sHtml+="</tr>"
+		sHtml+="<tr class='clsTableText'>";
+		sHtml+="<td>"+sRFC+"</td>";
+		sHtml+="</tr>";
+		sHtml+="</table>";
+		document.all["divRFC"].innerHTML=sHtml;
+	}
+}
+function fnRtnStatusImg(nStatus)
+{
+	var sImg;
+	var sName="";
+	var sRtn="";
+	switch(nStatus)
+	{
+		case 30:
+			sImg="ico_warn";
+			sName="Warning";
+			break;
+		case 25:
+			sImg="ico_ok_warn";
+			sName="OK warning";
+			break;
+		case 20:
+			sImg="ico_inform";
+			sName="Inform";
+			break;
+		case 10:
+			sImg="ico_missing";
+			sName="Missing";
+			break;
+		case -5:
+			sImg="ico_uo";
+			sName="Unobtainable";
+			break;
+		case -8:
+			sImg="ico_na";
+			sName="Not applicable";
+			break;
+		case 0:
+			sImg="ico_ok";
+			sName="OK";
+			break;
+		case -10:	
+		default:
+			sImg="blank";
+	}
+	sRtn="<img src='../img/"+sImg+".gif'>";
+	sRtn+=(sName=="")?"":sName;
+	return sRtn
+}
+function fnRtnLockImg(nLockStatus)
+{
+	var sRtn="";
+	switch (nLockStatus)
+	{
+		case 5:
+			sRtn="<img src='../img/ico_locked.gif'>Locked";
+			break;
+		case 6:
+			sRtn="<img src='../img/ico_frozen.gif'>Locked";
+			break;
+		default:
+	}
+	return sRtn
+}
+function fnRtnSDV(nSDVStatus)
+{
+	var sRtn="";
+	switch (nSDVStatus)
+	{
+		case 40:
+			sRtn="SDV: Queried";
+			break;
+		case 30:
+			sRtn="SDV: Planned";
+			break;
+		case 20:
+			sRtn="SDV: Completed";
+			break;
+		default:
+	}
+	return sRtn+"&nbsp;"
+}
+function fnSplitQS(sQS)
+{
+	var aItem;
+	var aQS=sQS.substring(1).split("&")
+	var aHashedArray=new Array();
+	for (var n=0;n<aQS.length;n++)
+	{	
+		aItem=aQS[n].split("=");
+		aHashedArray[aItem[0]]=aItem[1];
+	}
+	return aHashedArray;
+}
+
+</script>
+</head>
+<body onload="fnPageLoaded();">
+
+
+<table align='center' border='0' width='95%'>
+<tr height='10'><td></td></tr>
+<tr height='15' class='clsLabelText'>
+<td width="90%"><b><div id="divName"></div></b></td>
+<td width='10%'><a style='cursor:hand;' onclick='javascript:window.close();'><u>Close</u></a></td>
+</tr>
+<tr height='10'><td></td></tr>
+<tr height="30"><td colspan="4" class="clsLabelText"><div id="divHeader"></div></td></tr>
+
+  <tr height="5"><td></td></tr>
+
+  <tr>
+    <td colspan="4" class="clsLabelText">
+	  <div id="divComment"></div>
+	</td>
+  </tr>
+	
+  <tr>
+    <td colspan="4" class="clsLabelText">
+	  <div id="divRFC"></div>
+	</td>
+  </tr>
+
+  <tr>
+    <td colspan="4" class="clsLabelText">
+	  <div id="divViolate"></div>
+	</td>
+  </tr>
+
+  <tr>
+    <td colspan="4" class="clsLabelText">
+	  <div id="divDisc"></div>
+	</td>
+  </tr>
+
+</body>
+</html>

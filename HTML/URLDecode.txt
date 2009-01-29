@@ -1,0 +1,29 @@
+<SCRIPT LanGUAGE=VBScript runat=server>
+function urldecode(strtodecode)
+	strin = strtodecode
+	strout = ""
+	intpos = instr(strin, "+")
+	do while intpos
+		strleft = ""
+		strright = ""
+		if intpos > 1 then strleft = left(strin,intpos-1)
+		if intpos< len(strin) then strright = mid(strin, intpos+1)
+		strin = strleft & " " & strright
+		intpos = instr(strin, "+")
+		intloop = intloop + 1
+	loop
+	intpos = instr(strin, "%")
+	do while intpos
+		if intpos > 1 then strout = strout & left(strin, intpos - 1)
+		strout = strout & chr(cint("&H" & mid(strin, intpos + 1, 2)))
+		if intpos > (len(strin) - 3) then
+			strin = ""
+		else
+			strin = mid(strin, intpos + 3)
+		end if
+		intpos = instr(strin, "%")
+	loop
+	urldecode  = strout & strin
+end function
+</SCRIPT>
+	

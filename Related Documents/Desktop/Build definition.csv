@@ -1,0 +1,78 @@
+# MACRO 3.0 Installation Definition,,,,
+# Created by Matthew Martin 24/01/2003,,,,
+# Copyright InferMed Ltd. 2003. All rights reserved.,,,,
+
+# This Definition is used to create the [Setup1 Files] section of a Microsoft VB Package and Deployment package,,,,
+
+# Macros that may be used to specify destination paths: $(WinSysPath) $(WinSysPathSysFile) - DOESN'T WORK $(WinPath) $(AppPath) $(CommonFiles) $(CommonFilesSys) $(ProgramFiles),,,,
+# Macros that may be used to specify registration: $(DLLSelfRegister) $(TLBRegister) $(EXESelfRegister),,,,
+
+# Revision history:,,,,
+# TA 21/05/2003: Now use new zipped file  and create empty dirs manually,,,,
+
+# Column headings:,,,,
+# Source,Destination,Register,Shared,Cab
+
+# System files,,,,
+# Now includes Dart and Xceed libraries,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\System\*.dll,$(WinSysPath),$(DLLSelfRegister),TRUE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\System\*.ocx,$(WinSysPath),$(DLLSelfRegister),TRUE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\System\*.tlb,$(WinSysPath),$(TLBRegister),TRUE,TRUE
+
+#system files that do not need registering,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\SystemNoReg\*.dll,$(WinSysPath),,TRUE,TRUE
+
+# AREZZO,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\Arezzo\arezzo5.pc,$(WinSysPath),,TRUE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\Arezzo\ImedALM5.dll,$(WinSysPath),$(DLLSelfRegister),TRUE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\Arezzo\ImedPSS2.dll,$(WinSysPath),$(DLLSelfRegister),TRUE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\Arezzo\INT4200.*,$(WinSysPath),,TRUE,TRUE
+
+#AREZZO MACRO,,,,
+\\Imed1\Dev\MACRO 3.0\macro3_arezzo.pc,$(AppPath),,FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\macro3_arezzo.pc,$(AppPath)\Business Components,,FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\Business Components\pftojavascript3.pc,$(AppPath)\Business Components,,FALSE,TRUE
+
+# CUI,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\CUI\cui.pdf,$(AppPath),,FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\MTMCUI.exe,$(AppPath),,FALSE,TRUE
+
+# Demo studies and labs,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\DemoDBCab\*.*,$(AppPath)\In Folder,,FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0 System Files\DemoDBCab\Demostudy Docs\*.*,$(AppPath)\Documents,,FALSE,TRUE
+
+
+# Help files,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\Help\*.*,$(AppPath)\Help,,FALSE,TRUE
+
+
+# MDAC,,,,
+\\Imed1\Setups\Inhouse\MDACs\mdac 2.6 sp1\mdac_typ.exe,$(AppPath),,FALSE,TRUE
+
+# Program files,,,,
+\\IMED1\Dev\MACRO 3.0 Desktop\*.exe,$(AppPath),,FALSE,TRUE
+\\IMED1\Dev\MACRO 3.0\*.avi,$(AppPath),,FALSE,TRUE
+\\IMED1\Dev\MACRO 3.0\*.vbs,$(AppPath),,FALSE,TRUE
+# include simple MACROSettings30.txt: eventually this should be created by the installer containing user and organisation:,,,,
+# include database definition files for upgrade purposes,,,,
+\\Imed1\Dev\MACRO 3.0\*.txt,$(AppPath),,FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\*.zip,$(AppPath),,FALSE,TRUE
+# MACRO DLLs etc.,,,,
+\\Imed1\Dev\MACRO 3.0\Business Components\*.dll,$(AppPath)\Business Components,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\Data Components\*.*,$(AppPath)\Data Components,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\IO Components\*.*,$(AppPath)\IO Components,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\State Components\*.*,$(AppPath)\State Components,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\Subject Cache\*.*,$(AppPath)\Subject Cache,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\User Controls\*.*,$(AppPath)\User Controls,$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\MACRORR30.dll,$(AppPath),$(DLLSelfRegister),FALSE,TRUE
+\\Imed1\Dev\MACRO 3.0\MACROOCDisc30.dll,$(AppPath),$(DLLSelfRegister),FALSE,TRUE
+# upgrade DLL - remove eventually?,,,,
+\\Imed1\Dev\MACRO 3.0\MACROAccess22ToMSDE22.dll,$(AppPath),$(DLLSelfRegister),FALSE,TRUE
+
+# InferMed DLLs,,,,
+\\Imed1\Dev\MACRO 3.0 System Files\IMED_DLLs\*.*,$(WinSysPath),$(DLLSelfRegister),TRUE,TRUE
+
+\\Imed1\Dev\MACRO 3.0 Desktop Files\MACRO30.mdf,$(AppPath)\Database,,FALSE,TRUE
+
+#MSDE 2000,,,,
+\\Imed1\Dev\MACRO 3.0 Desktop Files\MSDE_2000.zip,$(AppPath),,FALSE,TRUE

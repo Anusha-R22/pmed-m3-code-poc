@@ -1,0 +1,419 @@
+|----------------------------------------------------------------------------------------
+|Copyright:	InferMed Ltd. 2001. All Rights Reserved
+|File:	MacroSecDb.txt
+|Author:	Mo Morris, 11th July 2001
+|Purpose:	This file stipulates the definition of the tables that constitute
+|		a Macro Security Database.
+|		Note that comment lines must start with a "|" character.
+|		Blank lines can be inserted between table definitions.
+|----------------------------------------------------------------------------------------
+|Revisions:
+|Mo Morris 14/9/01
+|		New permissions added. F5021,"Remove own locks" and F5022, "Remove all locks"
+|Mo Morris 18/9/01
+|		Table UserDatabase temporarily re-instated
+|Mo Morris 24/9/01
+|		Insert into MacroUser no longer sets values for LastLogin & FirstLogin
+|TA 18/1/2002: DCBB2.2.7.7: Online Support password now done in code for security reasons
+|
+|REM 12/04/02	Added new column to Databases table called SecureHTMLLocation
+|ZA 14/05/02    Deleted F3015, F5006 values from Function and RoleFunction table
+|Mo Morris 11/6/2002
+|		F1008 added to Function and RoleFunction
+|REM 08/07/02 - Added new permission, Maintain question groups, F3025
+|REM 02/10/02 - Add new table PasswordHistory
+|		Add new columns to MacroPassword and MACROuser
+|NCJ 16/10/02 - Add new permission F5023, View SDV mark
+|ASH 21/10/02 - Added new Table FunctionModule
+|ASH 30/10/02 - Added new permission, Edit question metadata description, F3026
+|REM 31/10/2002- Added two new columns to logInlog,LogdateTime_TZ,Location
+|----------------------------------------------------------------------------------------
+
+NAME|Databases|2.2.9
+FIELD|DatabaseCode|Code15
+FIELD|HTMLLocation|Text255
+FIELD|DatabaseLocation|Text255
+FIELD|DatabaseType|Integer
+FIELD|ServerName|Text50
+FIELD|NameOfDatabase|Text50
+FIELD|DatabaseUser|Text50
+FIELD|DatabasePassword|Text50
+PK|PKDatabases|(DatabaseCode)
+|SPECIALINSERT1 will insert ('Access','" & App.Path & "\Databases\Macro.mdb',0,'rde','macrotm') into (DatabaseCode,DatabaseLocation,DatabaseType,DatabaseUser,DatabasePassword)
+SPECIALINSERT1|
+
+NAME|Databases
+FIELD|DatabaseCode|Code15
+FIELD|HTMLLocation|Text255
+FIELD|DatabaseLocation|Text255
+FIELD|DatabaseType|Integer
+FIELD|ServerName|Text50
+FIELD|NameOfDatabase|Text50
+FIELD|DatabaseUser|Text50
+FIELD|DatabasePassword|Text50
+FIELD|SecureHTMLLocation|Text255
+PK|PKDatabases|(DatabaseCode)
+|SPECIALINSERT1 will insert ('Access','" & App.Path & "\Databases\Macro.mdb',0,'rde','macrotm') into (DatabaseCode,DatabaseLocation,DatabaseType,DatabaseUser,DatabasePassword)
+SPECIALINSERT1|
+
+NAME|Function
+FIELD|FunctionCode|Code15
+FIELD|Function|Text255
+PK|PKFunction|(FunctionCode)
+INSERT|(FunctionCode,Function)|('F1001','Access System Management')
+INSERT|(FunctionCode,Function)|('F1002','Access Exchange')
+INSERT|(FunctionCode,Function)|('F1003','Access Library Management')
+INSERT|(FunctionCode,Function)|('F1004','Access Study Definition')
+INSERT|(FunctionCode,Function)|('F1005','Access Data Entry')
+INSERT|(FunctionCode,Function)|('F1006','Access Data Review')
+INSERT|(FunctionCode,Function)|('F1007','Access Create Data Views')
+INSERT|(FunctionCode,Function)|('F1008','Access Query Module')
+INSERT|(FunctionCode,Function)|('F2001','Create user')
+INSERT|(FunctionCode,Function)|('F2002','Disable user')
+INSERT|(FunctionCode,Function)|('F2003','Change user access rights')
+INSERT|(FunctionCode,Function)|('F2004','Maintain user role')
+INSERT|(FunctionCode,Function)|('F2005','Register database')
+INSERT|(FunctionCode,Function)|('F2006','Assign user to study')
+INSERT|(FunctionCode,Function)|('F2007','Change password')
+INSERT|(FunctionCode,Function)|('F2008','Create database')
+INSERT|(FunctionCode,Function)|('F2009','Change system properties')
+INSERT|(FunctionCode,Function)|('F2010','View system log')
+INSERT|(FunctionCode,Function)|('F2011','Reset password')
+INSERT|(FunctionCode,Function)|('F2012','View site/server communication')
+INSERT|(FunctionCode,Function)|('F2013','Restore database')
+INSERT|(FunctionCode,Function)|('F3001','Create study')
+INSERT|(FunctionCode,Function)|('F3002','Delete study')
+INSERT|(FunctionCode,Function)|('F3003','Create question')
+INSERT|(FunctionCode,Function)|('F3004','Copy question from library study')
+INSERT|(FunctionCode,Function)|('F3005','Copy question from other study')
+INSERT|(FunctionCode,Function)|('F3006','Delete question')
+INSERT|(FunctionCode,Function)|('F3007','Maintain question')
+INSERT|(FunctionCode,Function)|('F3008','Maintain eForm')
+INSERT|(FunctionCode,Function)|('F3009','Delete eForm')
+INSERT|(FunctionCode,Function)|('F3010','Maintain schedule')
+INSERT|(FunctionCode,Function)|('F3011','Delete visit')
+INSERT|(FunctionCode,Function)|('F3012','Attach reference document')
+INSERT|(FunctionCode,Function)|('F3013','Remove reference document')
+INSERT|(FunctionCode,Function)|('F3014','Amend Arezzo')
+INSERT|(FunctionCode,Function)|('F3016','Remove report')
+INSERT|(FunctionCode,Function)|('F3017','Add eForm to visit')
+INSERT|(FunctionCode,Function)|('F3018','Remove eForm from visit')
+INSERT|(FunctionCode,Function)|('F3019','Edit study details')
+INSERT|(FunctionCode,Function)|('F3020','Create eForm')
+INSERT|(FunctionCode,Function)|('F3021','Create visit')
+INSERT|(FunctionCode,Function)|('F3022','Maintain visit')
+INSERT|(FunctionCode,Function)|('F3023','Update Arezzo from Clinical Gateway import')
+INSERT|(FunctionCode,Function)|('F3024','Maintain registration')
+INSERT|(FunctionCode,Function)|('F3025','Edit question groups')
+INSERT|(FunctionCode,Function)|('F3026','Edit question metadata description')
+INSERT|(FunctionCode,Function)|('F4001','Create site')
+INSERT|(FunctionCode,Function)|('F4002','Add site to study or study to site')
+INSERT|(FunctionCode,Function)|('F4003','Remove site from study')
+INSERT|(FunctionCode,Function)|('F4004','Distribute new version of study definition')
+INSERT|(FunctionCode,Function)|('F4005','Change study status')
+INSERT|(FunctionCode,Function)|('F4006','Import subject data')
+INSERT|(FunctionCode,Function)|('F4007','Export subject data')
+INSERT|(FunctionCode,Function)|('F4008','Import study definition')
+INSERT|(FunctionCode,Function)|('F5001','Create subject')
+INSERT|(FunctionCode,Function)|('F5002','View data')
+INSERT|(FunctionCode,Function)|('F5003','Change data')
+INSERT|(FunctionCode,Function)|('F5004','Lock data')
+INSERT|(FunctionCode,Function)|('F5005','Freeze data')
+INSERT|(FunctionCode,Function)|('F5006','View reports')
+INSERT|(FunctionCode,Function)|('F5007','Monitor / Review data')
+INSERT|(FunctionCode,Function)|('F5008','View communication settings')
+INSERT|(FunctionCode,Function)|('F5009','Change communication settings')
+INSERT|(FunctionCode,Function)|('F5010','System integrity check')
+INSERT|(FunctionCode,Function)|('F5012','Audit trail integrity check')
+INSERT|(FunctionCode,Function)|('F5013','View question audit trail')
+INSERT|(FunctionCode,Function)|('F5014','Overrule discrepancies')
+INSERT|(FunctionCode,Function)|('F5015','Create Data Entry question comment')
+INSERT|(FunctionCode,Function)|('F5016','View Data Entry question comments')
+INSERT|(FunctionCode,Function)|('F5017','Create discrepancy')
+INSERT|(FunctionCode,Function)|('F5018','Create SDV mark')
+INSERT|(FunctionCode,Function)|('F5019','Use Microsoft Word Templates')
+INSERT|(FunctionCode,Function)|('F5020','View subject data')
+INSERT|(FunctionCode,Function)|('F5021','Remove own locks')
+INSERT|(FunctionCode,Function)|('F5022','Remove all locks')
+INSERT|(FunctionCode,Function)|('F5023','View SDV mark')
+INSERT|(FunctionCode,Function)|('F6001','Maintain laboratories')
+INSERT|(FunctionCode,Function)|('F6002','Maintain CTC schemes')
+INSERT|(FunctionCode,Function)|('F6003','Maintain clinical tests')
+INSERT|(FunctionCode,Function)|('F6004','Maintain normal ranges')
+INSERT|(FunctionCode,Function)|('F6005','Maintain common toxicity criteria')
+
+NAME|LoginLog
+FIELD|LogDateTime|DoubleDate
+FIELD|LogNumber|Long
+FIELD|TaskId|Text50
+FIELD|LogMessage|Text255
+FIELD|UserName|Text20
+FIELD|LogDateTime_TZ|Integer
+FIELD|Location|Text50
+PK|PKLoginLog|(LogDateTime,LogNumber,TaskId)
+
+NAME|MacroPassword|3.0.13
+FIELD|MinLength|Integer
+FIELD|MaxLength|Integer
+FIELD|ExpiryPeriod|Integer
+BUILD|
+INSERT|(MinLength,MaxLength,ExpiryPeriod )|(6,15,90)
+
+NAME|MacroPassword
+FIELD|MinLength|Integer
+FIELD|MaxLength|Integer
+FIELD|ExpiryPeriod|Integer
+FIELD|EnforceMixedCase|Integer
+FIELD|EnforceDigit|Integer
+FIELD|AllowRepeatChars|Integer
+FIELD|AllowUserName|Integer
+FIELD|PasswordHistory|Integer
+FIELD|PasswordRetries|Integer
+BUILD|
+INSERT|(MinLength,MaxLength,ExpiryPeriod )|(6,15,90,0,0,1,1,1,5)
+
+NAME|MACROUser|3.0.13
+FIELD|UserName|Code20
+FIELD|UserNameFull|Text100
+FIELD|UserPassword|Text50
+FIELD|Enabled|Integer
+FIELD|LastLogin|DoubleDate
+FIELD|FirstLogin|DoubleDate
+FIELD|DefaultUserRoleCode|Text15
+PK|PKMACROUser|(UserName)
+INSERT|(UserName,UserNameFull,UserPassword,Enabled,DefaultUserRoleCode)|('rde','rde','macrotm',1,'MacroUser')
+
+NAME|MACROUser
+FIELD|UserName|Code20
+FIELD|UserNameFull|Text100
+FIELD|UserPassword|Text50
+FIELD|Enabled|Integer
+FIELD|LastLogin|DoubleDate
+FIELD|FirstLogin|DoubleDate
+FIELD|DefaultUserRoleCode|Text15
+FIELD|FailedAttempts|Integer
+FIELD|UserCreated|DoubleDate
+PK|PKMACROUser|(UserName)
+INSERT|(UserName,UserNameFull,UserPassword,Enabled,DefaultUserRoleCode,FailedAttempts)|('rde','rde','macrotm',1,'MacroUser',0)
+
+NAME|OnlineSupport
+FIELD|SupportUserName|Text50
+FIELD|SupportUserPassWord|Text50
+FIELD|SupportURL|Text255
+BUILD|
+|SPECIALINSERT4 will insert ('INFERMED',ENCRYPTED SUPPORT SITE PASSWORD,'www.infermed.com/support/insertproblem.asp') TA 18/1/2002
+SPECIALINSERT4|
+
+NAME|PasswordHistory
+FIELD|UserName|
+FIELD|HistoryNumber|
+FIELD|PasswordCreated|
+FIELD|UserPassword|
+PK|PKPasswordHistory|(UserName,HistoryNumber)
+
+NAME|Role
+FIELD|RoleCode|Code15
+FIELD|RoleDescription|Text255
+FIELD|Enabled|Integer
+PK|PKRole|(RoleCode)
+INSERT|(RoleCode,RoleDescription,Enabled)|('MacroUser','MacroUser',1)
+
+NAME|Rolefunction
+FIELD|RoleCode|Code15
+FIELD|FunctionCode|Code15
+FK|FKRoleFunctionFC|(FunctionCode)|Function|(FunctionCode)
+FK|FKRoleFunctionRC|(RoleCode)|Role|(RoleCode)
+PK|PKRoleFunction|(RoleCode,FunctionCode)
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1005')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1006')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1007')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F1008')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2005')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2006')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2007')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2008')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2009')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2010')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2011')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2012')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F2013')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3005')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3006')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3007')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3008')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3009')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3010')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3011')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3012')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3013')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3014')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3016')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3017')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3018')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3019')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3020')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3021')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3022')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3024')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3025')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F3026')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4005')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4006')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4007')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F4008')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5005')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5006')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5007')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5008')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5009')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5010')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5012')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5013')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5014')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5015')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5016')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5017')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5018')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5019')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5020')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5021')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5022')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F5023')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F6001')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F6002')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F6003')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F6004')
+INSERT|(RoleCode,FunctionCode)|('MacroUser','F6005')
+
+NAME|SecurityControl
+FIELD|SecurityMode|Long
+FIELD|MACROVersion|Text15
+FIELD|BuildSubVersion|Text5
+BUILD|
+|SPECIALINSERT2 will insert ('" & App.Major & "." & App.Minor & "','" & App.Revision & "') into (MACROVersion,BuildSubVersion)
+SPECIALINSERT2|
+
+NAME|UserDatabase
+FIELD|UserName|Code20
+FIELD|DatabaseCode|Code15
+FK|FKUserDatabaseDD|(DatabaseCode)|Databases|(DatabaseCode)
+FK|FKUserDatabaseUC|(UserName)|MacroUser|(UserName)
+PK|PKUserDatabase|(UserName,DatabaseCode)
+INSERT|(UserName,DatabaseCode)|('rde','Access')
+
+NAME|UserRole
+FIELD|UserName|Code20
+FIELD|RoleCode|Code15
+FIELD|DatabaseCode|Code15
+FIELD|AllTrials|Integer
+FIELD|AllSites|Integer
+FK|FKUserRoleDD|(DatabaseCode)|Databases|(DatabaseCode)
+FK|FKUserRoleUC|(UserName)|MacroUser|(UserName)
+FK|FKUserRoleRC|(RoleCode)|Role|(RoleCode)
+PK|PKUserRole|(UserName,RoleCode,DatabaseCode)
+INSERT|(UserName,RoleCode,DatabaseCode,AllTrials,AllSites)|('rde','macrouser','Access',1,1)
+
+NAME|FunctionModule
+FIELD|FunctionCode|Code15
+FIELD|MACROModule|Code15
+INSERT|(FunctionCode,MACROModule)|('F1001','SM')
+INSERT|(FunctionCode,MACROModule)|('F1002','EX')
+INSERT|(FunctionCode,MACROModule)|('F1003','LM')
+INSERT|(FunctionCode,MACROModule)|('F1004','SD')
+INSERT|(FunctionCode,MACROModule)|('F1005','DM')
+INSERT|(FunctionCode,MACROModule)|('F1006','DM')
+INSERT|(FunctionCode,MACROModule)|('F1007','DV')
+INSERT|(FunctionCode,MACROModule)|('F1008','QM')
+INSERT|(FunctionCode,MACROModule)|('F2001','SM')
+INSERT|(FunctionCode,MACROModule)|('F2002','SM')
+INSERT|(FunctionCode,MACROModule)|('F2003','SM')
+INSERT|(FunctionCode,MACROModule)|('F2004','SM')
+INSERT|(FunctionCode,MACROModule)|('F2005','SM')
+INSERT|(FunctionCode,MACROModule)|('F2006','SM')
+INSERT|(FunctionCode,MACROModule)|('F2007','SM')
+INSERT|(FunctionCode,MACROModule)|('F2008','SM')
+INSERT|(FunctionCode,MACROModule)|('F2009','SM')
+INSERT|(FunctionCode,MACROModule)|('F2010','SM')
+INSERT|(FunctionCode,MACROModule)|('F2011','SM')
+INSERT|(FunctionCode,MACROModule)|('F2012','SM')
+INSERT|(FunctionCode,MACROModule)|('F2013','SM')
+INSERT|(FunctionCode,MACROModule)|('F3001','SD')
+INSERT|(FunctionCode,MACROModule)|('F3002','SD')
+INSERT|(FunctionCode,MACROModule)|('F3003','SD')
+INSERT|(FunctionCode,MACROModule)|('F3004','SD')
+INSERT|(FunctionCode,MACROModule)|('F3005','SD')
+INSERT|(FunctionCode,MACROModule)|('F3006','SD')
+INSERT|(FunctionCode,MACROModule)|('F3007','SD')
+INSERT|(FunctionCode,MACROModule)|('F3008','SD')
+INSERT|(FunctionCode,MACROModule)|('F3009','SD')
+INSERT|(FunctionCode,MACROModule)|('F3010','SD')
+INSERT|(FunctionCode,MACROModule)|('F3011','SD')
+INSERT|(FunctionCode,MACROModule)|('F3012','SD')
+INSERT|(FunctionCode,MACROModule)|('F3013','SD')
+INSERT|(FunctionCode,MACROModule)|('F3014','SD')
+INSERT|(FunctionCode,MACROModule)|('F3016','SD')
+INSERT|(FunctionCode,MACROModule)|('F3017','SD')
+INSERT|(FunctionCode,MACROModule)|('F3018','SD')
+INSERT|(FunctionCode,MACROModule)|('F3019','SD')
+INSERT|(FunctionCode,MACROModule)|('F3020','SD')
+INSERT|(FunctionCode,MACROModule)|('F3021','SD')
+INSERT|(FunctionCode,MACROModule)|('F3022','SD')
+INSERT|(FunctionCode,MACROModule)|('F3023','SD')
+INSERT|(FunctionCode,MACROModule)|('F3024','SD')
+INSERT|(FunctionCode,MACROModule)|('F3025','SD')
+INSERT|(FunctionCode,MACROModule)|('F3026','SD')
+INSERT|(FunctionCode,MACROModule)|('F4001','EX')
+INSERT|(FunctionCode,MACROModule)|('F4002','EX')
+INSERT|(FunctionCode,MACROModule)|('F4003','EX')
+INSERT|(FunctionCode,MACROModule)|('F4004','EX')
+INSERT|(FunctionCode,MACROModule)|('F4005','EX')
+INSERT|(FunctionCode,MACROModule)|('F4006','EX')
+INSERT|(FunctionCode,MACROModule)|('F4007','EX')
+INSERT|(FunctionCode,MACROModule)|('F4008','EX')
+INSERT|(FunctionCode,MACROModule)|('F5001','DM')
+INSERT|(FunctionCode,MACROModule)|('F5002','DM')
+INSERT|(FunctionCode,MACROModule)|('F5003','DM')
+INSERT|(FunctionCode,MACROModule)|('F5004','DM')
+INSERT|(FunctionCode,MACROModule)|('F5005','DM')
+INSERT|(FunctionCode,MACROModule)|('F5006','DM')
+INSERT|(FunctionCode,MACROModule)|('F5007','DM')
+INSERT|(FunctionCode,MACROModule)|('F5008','DM')
+INSERT|(FunctionCode,MACROModule)|('F5009','DM')
+INSERT|(FunctionCode,MACROModule)|('F5010','DM')
+INSERT|(FunctionCode,MACROModule)|('F5012','DM')
+INSERT|(FunctionCode,MACROModule)|('F5013','DM')
+INSERT|(FunctionCode,MACROModule)|('F5014','DM')
+INSERT|(FunctionCode,MACROModule)|('F5015','DM')
+INSERT|(FunctionCode,MACROModule)|('F5016','DM')
+INSERT|(FunctionCode,MACROModule)|('F5017','DM')
+INSERT|(FunctionCode,MACROModule)|('F5018','DM')
+INSERT|(FunctionCode,MACROModule)|('F5019','DM')
+INSERT|(FunctionCode,MACROModule)|('F5020','DM')
+INSERT|(FunctionCode,MACROModule)|('F5021','DM')
+INSERT|(FunctionCode,MACROModule)|('F5022','DM')
+INSERT|(FunctionCode,MACROModule)|('F5023','DM')
+INSERT|(FunctionCode,MACROModule)|('F6001','EX')
+INSERT|(FunctionCode,MACROModule)|('F6002','LM')
+INSERT|(FunctionCode,MACROModule)|('F6003','LM')
+INSERT|(FunctionCode,MACROModule)|('F6004','LM')
+INSERT|(FunctionCode,MACROModule)|('F6005','LM')

@@ -1,0 +1,46 @@
+Type=Control
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\..\..\WINNT\System32\stdole2.tlb#OLE Automation
+UserControl=DownArrowButton Source Code\DownArrowButton.ctl
+Form=DownArrowButton Source Code\frmAboutControl.frm
+Startup="(None)"
+HelpFile=""
+Title="MACRODownArrowButton30"
+ExeName32="MACRODownArrowButton30.ocx"
+Command32=""
+Name="MACRODownArrowButton30"
+HelpContextID="0"
+Description="MACRO Down Arrow Button v3.0.27"
+CompatibleMode="2"
+CompatibleEXE32="DownArrowButton Source Code\COMP_MACRODownArrowButton30.ocx"
+VersionCompatible32="1"
+MajorVer=3
+MinorVer=0
+RevisionVer=27
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionCompanyName="InferMed Ltd"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=1
+DebugStartupComponent=DownArrowButton
+VersionComments="MACRO Down Arrow Button v3.0.27"
+VersionFileDescription="MACRO Down Arrow Button v3.0.27"
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

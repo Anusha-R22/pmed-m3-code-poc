@@ -1,0 +1,100 @@
+<%
+
+'----------------------------------------------------------------------------------------'
+'   Copyright:  InferMed Ltd. 2001. All Rights Reserved
+'   File:       StringUtilities.txt
+'   Author      Matthew Martin, 11/10/2001
+'   Purpose:    Common string functions.
+'----------------------------------------------------------------------------------------'
+
+'----------------------------------------------------------------------------------------'
+' Revisions:
+' MLM 11/10/01: Created. Copied regional settings functions from modStringUtilities.bas.
+'----------------------------------------------------------------------------------------'
+
+
+'-------------------------------------------------------------------------
+Function ConvertLocalNumToStandard(sLocalNumStr)
+'-------------------------------------------------------------------------
+' Convert number string in "regional" format to "standard" format
+' Replace all local decimal points and thousand separators in LocalNumStr
+' to dots and commas
+' NCJ 15 Nov 99
+' MLM 08/03/01: Always remove thousands separators
+'-------------------------------------------------------------------------
+Dim n
+Dim sLocalDot
+Dim sLocalComma
+Dim sStdStr
+Dim sCurChar
+
+    sStdStr = sLocalNumStr  ' Initially assume current value
+    If sLocalNumStr > "" Then
+        ' Get the regional settings
+        sLocalDot = RegionalDecimalPointChar
+        sLocalComma = RegionalThousandSeparatorChar
+        ' Do we need to convert?
+        If sLocalDot <> "." Or sLocalComma <> "," Then
+            ' Regional setting is different from standard
+            sStdStr = ""
+            For n = 1 To Len(sLocalNumStr)
+                ' Pick up next character
+                sCurChar = Mid(sLocalNumStr, n, 1)
+                ' Convert if necessary
+                Select Case sCurChar
+                Case sLocalDot
+                    ' Replace with standard dot
+                    sStdStr = sStdStr & "."
+                Case sLocalComma
+                    'TA 01/03/2001: do not put in thousand separators
+                    ' Replace with standard comma
+                    'sStdStr = sStdStr & msSTANDARD_COMMA
+                Case Else
+                    ' Leave it unchanged
+                    sStdStr = sStdStr & sCurChar
+                End Select
+            Next
+        Else
+            'MLM 08/03/01: If regional setting is same as standard, only remove thousands separators
+            sStdStr = Replace(sLocalNumStr, ",", "")
+        End If
+    End If
+    ConvertLocalNumToStandard = sStdStr
+    
+End Function
+
+'-----------------------------------------------------
+Function RegionalDecimalPointChar()
+'-----------------------------------------------------
+' Return local character used for decimal point
+' (as in Windows Regional Settings)
+' Do this by formatting 0.1 and looking at second char
+' NCJ 15 Nov 99
+'-----------------------------------------------------
+
+Dim dblNum
+Dim sNum
+
+    dblNum = 1 / 10     ' Set it to 0.1
+    sNum = FormatNumber(CStr(dblNum), 1, -1)
+    RegionalDecimalPointChar = Mid(sNum, 2, 1)
+    
+End Function
+
+'-----------------------------------------------------
+Function RegionalThousandSeparatorChar()
+'-----------------------------------------------------
+' Return local character used for thousand separator
+' (as in Windows Regional Settings)
+' Do this by formatting 1,000 and looking at second char
+' NCJ 15 Nov 99
+'-----------------------------------------------------
+
+Dim sNum
+
+    sNum = FormatNumber("1000", 0 , -1, , -1)
+    RegionalThousandSeparatorChar = Mid(sNum, 2, 1)
+
+End Function
+
+%>

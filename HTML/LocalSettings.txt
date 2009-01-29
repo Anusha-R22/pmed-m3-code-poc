@@ -1,0 +1,17 @@
+<%
+'	DPH 08/04/2002 - Added secure folder setting
+
+'	Example path settings (IIS Published Folder)
+	gsAppPath = "c:\my documents\vss\macro2\html\"
+
+'	Example Path (IIS Secure Folder)
+	gsSecureFolder = "c:\my documents\secure folder\"
+
+'	Example database name - must be changed to a database name which exists in security.mdb
+'	The database must have the appropriate DatabaseUser and DatabasePassword settings
+	gsDatabase = "demonstrate"
+
+
+%>
+
+

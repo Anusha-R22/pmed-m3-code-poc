@@ -1,0 +1,135 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\WINDOWS\System32\stdole2.tlb#OLE Automation
+Reference=*\G{00025E01-0000-0000-C000-000000000046}#4.0#0#..\..\WINDOWS\System32\DAO350.DLL#Microsoft DAO 3.51 Object Library
+Reference=*\G{64674040-3A82-101B-8181-00AA003743D3}#1.1#0#..\..\WINDOWS\System32\Win.tlb#Windows API (ANSI)
+Reference=*\G{00000206-0000-0010-8000-00AA006D2EA4}#2.6#0#..\..\Program Files\Common Files\system\ado\msado26.tlb#Microsoft ActiveX Data Objects 2.6 Library
+Reference=*\G{00000600-0000-0010-8000-00AA006D2EA4}#2.6#0#..\..\Program Files\Common Files\System\ado\msadox.dll#Microsoft ADO Ext. 2.6 for DDL and Security
+Reference=*\G{420B2830-E718-11CF-893D-00A0C9054228}#1.0#0#..\..\WINDOWS\System32\scrrun.dll#Microsoft Scripting Runtime
+Reference=*\G{18704A38-6166-42EA-8459-DE91576EC790}#2.0#0#Related Documents\IMEDSettings10.dll#Imed Settings
+Reference=*\G{A8449511-F7C6-11D4-8022-0060082AE372}#1.0#0#..\..\Program Files\Xceed Components\Xceed Binary Encoding Library\Bin\XceedBen.dll#Xceed Binary Encoding Library v1.0
+Reference=*\G{55A560A7-E3F9-4790-8D22-F3A97009AC8F}#1.0#0#..\..\Program Files\Xceed Components\Xceed Encryption Library\Bin\XceedCry.dll#Xceed Encryption Library v1.0
+Reference=*\G{DB797681-40E0-11D2-9BD5-0060082AE372}#4.5#0#..\MACRO 2.2\XceedZip.dll#Xceed Zip Compression Library v4.5
+Reference=*\G{8338043C-2563-40B4-8BFD-BD84313DE5A3}#1.0#0#Business Components\\MACROUserBS30.dll#MACRO User Business Services v3.0.82
+Reference=*\G{DBCF57FC-AD62-4D84-BC68-1CABE10E0141}#1.0#0#Business Components\\MACROTimeZoneBS30.dll#MACRO Time Zone v3.0.82
+Object={F9043C88-F6F2-101A-A3C9-08002B2F49FB}#1.2#0; COMDLG32.OCX
+Object={3B7C8863-D78F-101B-B9B5-04021C009402}#1.2#0; RICHTX32.OCX
+Object={48E59290-9880-11CF-9754-00AA00C00908}#1.0#0; MSINET.OCX
+Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCTL.OCX
+Object={5E9E78A0-531B-11CF-91F6-C2863C385E30}#1.0#0; MSFLXGRD.OCX
+Object={86CF1D34-0C5F-11D2-A9FC-0000F8754DA1}#2.0#0; MSCOMCT2.OCX
+Module=modADODBConnection; Source Code\modADODBConnection.bas
+Class=clsTextList; Source Code\clsTextList.cls
+Module=modStringUtilities; Source Code\modStringUtilities.bas
+Class=clsRSSubjectCheck; Source Code\clsRSSubjectCheck.cls
+Class=clsRSSubjectChecks; Source Code\clsRSSubjectChecks.cls
+Class=clsDataTable; Source Code\clsDataTable.cls
+Class=clsDataRecord; Source Code\clsDataRecord.cls
+Module=basEnumerations; Source Code\basEnumerations.bas
+Module=frmMenu; Source Code\frmMenuRS.bas
+Module=modUserFunctions; Source Code\modUserFunctions.bas
+Class=clsRSSubjectNumbering; Source Code\clsRSSubjectNumbering.cls
+Module=modGUIUtilities; Source Code\modGUIUtilities.bas
+Module=modNewDatabasesAndTables; Source Code\modNewDatabasesAndTables.bas
+Module=modUpgradeDatabases; Source Code\modUpgradeDatabases.bas
+Class=MACRODatabases; Source Code\MACRODatabases.cls
+Module=libConnection; Source Code\libConnection.bas
+Module=libLibrary; Source Code\libLibrary.bas
+Module=libWindows; Source Code\libWindows.bas
+Module=modSettings; Source Code\modSettings.bas
+Module=libXCeed; Source Code\libXCeed.bas
+Module=basCommon; Source Code\basCommon.bas
+Module=basMainRRServerModule; Source Code\basMainRRServerModule.bas
+Startup="(None)"
+HelpFile=""
+Title="MACRORegistration"
+ExeName32="MACRORR30.dll"
+Command32=""
+Name="MACRORR30"
+HelpContextID="0"
+Description="MACRO Registration and Randomisation v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="Source Code\COMP_MACRORR30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO Registration and Randomisation v3.0.82"
+VersionCompanyName="InferMed Ltd"
+VersionFileDescription="MACRO Registration and Randomisation v3.0.82"
+VersionLegalCopyright="Copyright InferMed Ltd 2001, All Rights Reserved"
+VersionProductName="MACRO"
+CondComp="WebRDE = -1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

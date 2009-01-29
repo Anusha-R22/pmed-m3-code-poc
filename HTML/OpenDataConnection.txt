@@ -1,0 +1,8 @@
+
+<%
+
+Set MACROCnn = Server.CreateObject("ADODB.connection") 
+
+MACROCnn.Open session("strConn")
+
+%>

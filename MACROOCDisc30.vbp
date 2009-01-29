@@ -1,0 +1,98 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\WINDOWS\System32\stdole2.tlb#OLE Automation
+Reference=*\G{00000206-0000-0010-8000-00AA006D2EA4}#2.6#0#..\..\Program Files\Common Files\system\ado\msado26.tlb#Microsoft ActiveX Data Objects 2.6 Library
+Reference=*\G{8338043C-2563-40B4-8BFD-BD84313DE5A3}#1.0#0#Business Components\\MACROUserBS30.dll#MACRO User Business Services v3.0.82
+Object={831FDD16-0C5C-11D2-A9FC-0000F8754DA1}#2.0#0; mscomctl.ocx
+Class=OCDiscrepancies; OC Disc Source Code\OCDiscrepancies.cls
+Form=OC Disc Source Code\frmOCDiscrepancies.frm
+Module=libLibrary; OC Disc Source Code\libLibrary.bas
+Module=libListView; OC Disc Source Code\libListView.bas
+Module=libWindows; OC Disc Source Code\libWindows.bas
+Startup="(None)"
+HelpFile=""
+Title="MACROOCDisc30"
+ExeName32="MACROOCDisc30.dll"
+Command32=""
+Name="MACROOCDisc30"
+HelpContextID="0"
+Description="MACRO Oracle Clinical Discrepancies Management v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="OC Disc Source Code\COMP_MACROOCDisc30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO Oracle Clinical Discrepancies Management v3.0.82"
+VersionCompanyName="InferMed Ltd"
+VersionFileDescription="MACRO Oracle Clinical Discrepancies Management v3.0.82"
+CondComp="WebRDE = -1"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

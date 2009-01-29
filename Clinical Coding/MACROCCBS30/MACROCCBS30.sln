@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MACROCCBS30", "MACROCCBS30.csproj", "{ECCD2235-0307-41AB-9882-D624E9F744AE}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{ECCD2235-0307-41AB-9882-D624E9F744AE}.Debug.ActiveCfg = Debug|.NET
+		{ECCD2235-0307-41AB-9882-D624E9F744AE}.Debug.Build.0 = Debug|.NET
+		{ECCD2235-0307-41AB-9882-D624E9F744AE}.Release.ActiveCfg = Release|.NET
+		{ECCD2235-0307-41AB-9882-D624E9F744AE}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

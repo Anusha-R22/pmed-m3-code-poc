@@ -1,0 +1,93 @@
+<head>
+<title>Update Discrepancy</title>
+<link rel='stylesheet' href='../style/MACRO1.css' type='text/css'>
+<script language="javascript">
+var sDel1="`";
+function fnPageLoaded()
+{
+	var aArgs=window.dialogArguments;
+	fnSetCaption(aArgs[1]);
+	fnSetLabel("Please enter Discrepancy text");
+	fnSetText(aArgs[0],aArgs[2]);
+	txtInput.focus();
+}
+function fnSetCaption(sCaption)
+{
+	document.all["divName"].innerHTML="<b>Question: "+sCaption+"</b>";
+}
+function fnSetLabel(sLabel)
+{
+	document.all["divLabel"].innerHTML=sLabel;
+}
+function fnSetText(sAction,sMIText)
+{
+	var sText;
+	switch (sAction)
+	{
+		case 0: sText="";break;
+		case 1: sText="Discrepancy re-raised";break;
+		case 2: sText="Discrepancy closed";break;
+		default: sText=sMIText;break;
+	}
+	document.all["txtInput"].value=sText;
+}
+function fnSubmit()
+{
+	var aArgs=window.dialogArguments;
+	var sRtn="";
+	var sStr=txtInput.value;
+
+	if (!fnIllegalChars(sStr))
+	{
+		if (fnLength(sStr,2000))
+		{
+			sRtn=aArgs[0]+sDel1+sStr;
+		}
+		else
+		{
+			alert("Discrepancy text cannot exceed 2000 characters in length")
+			txtInput.select();
+			return;
+		}
+	}
+	else
+	{
+		alert("Discrepancies cannot contain the following characters: `|~\"");
+		txtInput.select();
+		return;
+	}		
+	fnReturn(sRtn);
+}
+function fnIllegalChars(sStr)
+{
+	var sPattern = /[`|~"]/;
+	return sPattern.exec(sStr);
+}	
+function fnLength(sStr,nLength)
+{
+	if (sStr.length>nLength) return false;
+	return true;
+}
+function fnReturn(sVal)
+{
+	this.returnValue=sVal;
+	this.close();
+}
+</script>
+</head>
+<body onload='fnPageLoaded();'><table align='center' width='95%' border='0'>
+<tr height='10'><td></td></tr>
+<tr height='15' class='clsLabelText'><td colspan='2'><div id='divName'></div></td>
+<td><a style='cursor:hand;' onclick='javascript:fnSubmit();'><u>OK</u></a></td>
+<td><a style='cursor:hand;' onclick='javascript:fnReturn("");'><u>Cancel</u></a></td>
+</tr>
+<tr height='15'><td></td></tr>
+<tr height='5'><td></td></tr>
+<tr height='30'><td colspan='4' class='clsLabelText'>
+<div id='divLabel'></div></td></tr>
+<tr height='5'><td></td></tr>
+<tr><td width='100' class='clsLabelText'></td>
+<td><textarea class='clsTextbox' cols=50 rows=5 name="txtInput" maxlength="255" wrap="physical"></TEXTAREA></td>
+</tr>
+</table>
+</body></html>

@@ -1,0 +1,4 @@
+<%
+sUserRole="wcprole"
+sDatabase="wcp"
+%>

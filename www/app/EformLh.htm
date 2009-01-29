@@ -1,0 +1,62 @@
+<html>
+<head>
+<!--r--><!--r-->
+<!--r--><link rel="stylesheet" HREF="../style/MACRO1.css" type="text/css"><!--r-->
+<!--r--><script language="javascript" src='../script/HoverButton1.js'></script><!--r-->
+<script language="javascript">
+	var sDel1="`";
+	var sDel2="|";
+	var undefined;
+//<!--r-->
+	function fnKeyDown()
+	{
+		if ((event.keyCode<112)||(event.keyCode>123)) return;
+		event.returnValue=false;
+		event.keyCode=0;
+	}
+	document.onkeydown=fnKeyDown;
+	document.oncontextmenu=fnContextMenu;
+	function fnContextMenu(){return false};
+	function fnDoButtonClick(sId)
+	{
+		if (window.parent.frames[2].fnCheckCurrentField()) window.parent.frames[2].fnSave("e"+sId);
+	}
+//<!--r-->
+	function fnPageLoaded()
+	{
+		fnInitialiseButton("divEform","clsEformHoverButton clsHoverButtonActive","clsEformHoverButton clsHoverButtonInactive","clsEformHoverButton clsHoverButtonSelected");
+	}
+
+	function fnLoadEformBorder(sEformList,sSelectedEformTaskId)
+	{
+		//call this to load menu
+		var sHtml;
+		var aItem;
+		var aList=sEformList.split(sDel1);
+		
+		sHtml ="<table width='170' border='0' cellpadding='0' cellspacing='0' valign='top' align='left'>"
+		for (var n=0;n<aList.length;n++)
+		{
+			aItem=aList[n].split(sDel2);
+			sHtml+="<tr>";
+			sHtml+="<td valign='top' align='center'>";
+			sHtml+=(aItem[1]==sSelectedEformTaskId)?"<div title='"+aItem[2]+"' id='divEform' class='clsEformHoverButton clsHoverButtonSelected'>"+aItem[0]+"</div>":"<div title='"+aItem[2]+"' onclick='fnDoButtonClick(\""+aItem[1]+"\");' onmouseout='javascript:fnSetButtonUnHover(this);' onmouseover='javascript:fnSetButtonHover(this);' id='divEform' class='clsEformHoverButton clsHoverButtonInactive'>"+aItem[0]+"</div>";
+			sHtml+="</td>";
+			sHtml+="</tr>";
+			sHtml+="<tr height='10'><td></td></tr>";
+		}
+		sHtml+="</table>"
+		document.all.divEforms.innerHTML=sHtml;
+		fnPageLoaded();
+	}
+	function fnDisable()
+	{
+		document.all.divEforms.innerHTML="";
+	}
+</script>
+</head>
+<body class='clsScheduleBorder'>
+<div id="divEforms"></div>
+</body>
+</html>
+

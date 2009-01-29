@@ -1,0 +1,78 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\WINNT\system32\stdole2.tlb#OLE Automation
+Reference=*\G{00000206-0000-0010-8000-00AA006D2EA4}#2.6#0#..\..\..\Program Files\Common Files\System\ADO\msado15.dll#Microsoft ActiveX Data Objects 2.6 Library
+Reference=*\G{31BD531D-64B2-4CF4-ADB8-6DC47A2D8517}#1.0#0#..\Data Components\\MACROMIMSGDS30.dll#MACRO MIMessage Data Services v3.0.82
+Reference=*\G{AD281BA4-EDB6-498F-A481-286D01E66CE8}#1.0#0#..\State Components\\MACROMIMSGST30.dll#MACRO MIMessage State v3.0.82
+Reference=*\G{2D2F1F08-8AED-44F1-8AC5-389D7F30089E}#1.0#0#..\..\..\WINNT\system32\IMEDQD20.dll#IMED Query Definition v2.0.3
+Reference=*\G{441EFD5F-8E07-4251-9721-61E6B5389363}#1.0#0#..\..\..\WINNT\system32\IMEDQDS20.dll#IMED Query Definition Business Services v2.0.3
+Class=MIMsgStatic; MIMsg Source Code\MIMsgStatic.cls
+Module=modMIMsg; MIMsg Source Code\modMIMsg.bas
+Class=MINote; MIMsg Source Code\MINote.cls
+Class=MIDiscrepancy; MIMsg Source Code\MIDiscrepancy.cls
+Class=MIDataLists; MIMsg Source Code\MIDataLists.cls
+Module=libADO; MIMsg Source Code\libADO.bas
+Module=libLibrary; MIMsg Source Code\libLibrary.bas
+Module=libSQL; MIMsg Source Code\libSQL.bas
+Class=MISDV; MIMsg Source Code\MISDV.cls
+Class=MIMsg; MIMsg Source Code\MIMsg.cls
+Module=libConnection; MIMsg Source Code\libConnection.bas
+Startup="(None)"
+HelpFile=""
+Title="MACROMIMsgBS30"
+ExeName32="MACROMIMsgBS30.dll"
+Command32=""
+Name="MACROMIMsgBS30"
+HelpContextID="0"
+Description="MACRO MIMessage Business Services v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="MIMsg Source Code\COMP_MACROMIMsgBS30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO MIMessage Business Services v3.0.82"
+VersionCompanyName="InferMed Ltd"
+VersionFileDescription="MACRO MIMessage Business Services v3.0.82"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=-1
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

@@ -1,0 +1,1214 @@
+CREATE TABLE ArezzoToken ( ArezzoID VARCHAR(50), DBToken INTEGER, ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, CONSTRAINT PKArezzoToken PRIMARY KEY (ArezzoID))
+
+CREATE INDEX idx_AT_TrialSiteSubject ON ArezzoToken (ClinicalTrialId,TrialSite,PersonId)
+
+CREATE TABLE AutoImportControl ( UpLoadOrder SMALLINT, StartStop VARCHAR(10), WaitInterval INTEGER, CONSTRAINT PKUpLoadOrder PRIMARY KEY (UpLoadOrder))
+
+INSERT INTO AutoImportControl (UpLoadOrder,StartStop,WaitInterval) VALUES (1,'START',60)
+
+CREATE TABLE ClinicalTest ( ClinicalTestCode VARCHAR(15), ClinicalTestDescription VARCHAR(255), ClinicalTestGroupCode VARCHAR(15), Unit VARCHAR(15), CONSTRAINT PKClinicalTest PRIMARY KEY (ClinicalTestCode))
+
+CREATE INDEX idx_CT_ClinicalTestGroupCode ON ClinicalTest (ClinicalTestGroupCode)
+
+CREATE TABLE ClinicalTestGroup ( ClinicalTestGroupCode VARCHAR(15), ClinicalTestGroupDescription VARCHAR(255), CONSTRAINT PKClinicalTestGroup PRIMARY KEY (ClinicalTestGroupCode))
+
+CREATE TABLE ClinicalTrial ( ClinicalTrialId INTEGER, ClinicalTrialName VARCHAR(15), ClinicalTrialDescription VARCHAR(255), PhaseId SMALLINT, StatusId SMALLINT, Keywords VARCHAR(255), ExpectedRecruitment INTEGER, TrialTypeId SMALLINT, CONSTRAINT ClinicalTrialName UNIQUE (ClinicalTrialName), CONSTRAINT PKClinicalTrial PRIMARY KEY (ClinicalTrialId))
+
+INSERT INTO ClinicalTrial (ClinicalTrialId,ClinicalTrialName,ClinicalTrialDescription,PhaseId,StatusId) VALUES (0,'Library','Library',1,1)
+
+CREATE TABLE CRFElement ( ClinicalTrialId INTEGER, VersionId SMALLINT, CRFPageId INTEGER, CRFElementId SMALLINT, DataItemId INTEGER, ControlType SMALLINT, FontColour INTEGER, Caption VARCHAR(255), FontName VARCHAR(50), FontBold SMALLINT, FontItalic SMALLINT, FontSize SMALLINT, FieldOrder SMALLINT, SkipCondition VARCHAR(2000), Height SMALLINT, Width SMALLINT, CaptionX INTEGER, CaptionY INTEGER, X INTEGER, Y INTEGER, PrintOrder INTEGER, Hidden SMALLINT, LocalFlag SMALLINT, Optional SMALLINT, Mandatory SMALLINT, RequireComment SMALLINT, RoleCode VARCHAR(15), ClinicalTestDateExpr VARCHAR(2000), CONSTRAINT PKCRFElement PRIMARY KEY (ClinicalTrialId,CRFPageId,CRFElementId,VersionId))
+
+CREATE TABLE CRFPage ( ClinicalTrialId INTEGER, VersionId SMALLINT, CRFPageId INTEGER, CRFTitle VARCHAR(50), BackgroundColour INTEGER, CRFPageOrder SMALLINT, CRFPageCode VARCHAR(15), CopiedFromClinicalTrialId INTEGER, CopiedFromVersionId SMALLINT, CopiedFromCRFPageId INTEGER, CRFPageLabel VARCHAR(255), LocalCRFPageLabel SMALLINT, SequentialEntry SMALLINT, CRFPageDateLabel VARCHAR(255), DisplayNumbers SMALLINT, HideIfInactive TINYINT, eFormDatePrompt TINYINT, CONSTRAINT PKCRFPage PRIMARY KEY (ClinicalTrialId,CRFPageId,VersionId))
+
+CREATE INDEX idx_CRF_CRFPageCode ON CRFPage (CRFPageCode)
+
+CREATE TABLE CRFPageInstance ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, CRFPageTaskId INTEGER, VisitId INTEGER, CRFPageId INTEGER, VisitCycleNumber SMALLINT, CRFPageCycleNumber SMALLINT, CRFPageDate NUMERIC(16,10), CRFPageStatus SMALLINT, Changed SMALLINT, CRFPageInstanceLabel VARCHAR(255), LockStatus TINYINT, ImportTimeStamp NUMERIC(16,10), LaboratoryCode VARCHAR(15), CONSTRAINT PKCRFPageInstance PRIMARY KEY (ClinicalTrialId,TrialSite,PersonId,CRFPageTaskId))
+
+CREATE INDEX idx_CPI_VisitId ON CRFPageInstance (VisitId)
+
+CREATE INDEX idx_CPI_CRFPageId ON CRFPageInstance (CRFPageId)
+
+CREATE TABLE CTC ( CTCId INTEGER, CTCSchemeCode VARCHAR(15), ClinicalTestCode VARCHAR(15), CTCGrade SMALLINT, CTCMin DECIMAL(16,10), CTCMax DECIMAL(16,10), CTCMinType SMALLINT, CTCMaxType SMALLINT, CONSTRAINT PKCTC PRIMARY KEY (CTCSchemeCode,CTCId))
+
+CREATE INDEX idx_CTC_ClinicalTestCode ON CTC (ClinicalTestCode)
+
+CREATE TABLE CTCScheme ( CTCSchemeCode VARCHAR(15), CTCSchemeDescription VARCHAR(255), CONSTRAINT PKCTCScheme PRIMARY KEY (CTCSchemeCode))
+
+CREATE TABLE DataItem ( ClinicalTrialId INTEGER, VersionId SMALLINT, DataItemId INTEGER, DataItemCode VARCHAR(15), DataItemName VARCHAR(50), DataType SMALLINT, DataItemFormat VARCHAR(255), UnitOfMeasurement VARCHAR(15), DataItemLength SMALLINT, Derivation VARCHAR(2000), DataItemHelpText VARCHAR(255), CopiedFromClinicalTrialId INTEGER, CopiedFromVersionId SMALLINT, CopiedFromDataItemId INTEGER, ExportName VARCHAR(50), DataItemCase SMALLINT, ClinicalTestCode VARCHAR(15), CONSTRAINT PKDataItem PRIMARY KEY (ClinicalTrialId,DataItemId,VersionId))
+
+CREATE INDEX idx_DI_DataItemCode ON DataItem (DataItemCode)
+
+CREATE INDEX idx_DI_DataItemName ON DataItem (DataItemName)
+
+CREATE TABLE DataItemResponse ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, ResponseTaskId INTEGER, VisitId INTEGER, CRFPageId INTEGER, CRFElementId SMALLINT, DataItemId INTEGER, VisitCycleNumber SMALLINT, CRFPageCycleNumber SMALLINT, CRFPageTaskId INTEGER, ResponseValue VARCHAR(255), ResponseTimeStamp NUMERIC(16,10), ValueCode VARCHAR(15), UserName VARCHAR(20), UnitOfMeasurement VARCHAR(15), Comments VARCHAR(255), ResponseStatus SMALLINT, Changed SMALLINT, SoftwareVersion VARCHAR(15), ReasonForChange VARCHAR(255), LockStatus TINYINT, ImportTimeStamp NUMERIC(16,10), ValidationId SMALLINT, ValidationMessage VARCHAR(2000), OverruleReason VARCHAR(255), LabResult VARCHAR(1), CTCGrade SMALLINT, ClinicalTestDate NUMERIC(16,10), LaboratoryCode VARCHAR(15), HadValue SMALLINT, CONSTRAINT PKDataItemResponse PRIMARY KEY (ClinicalTrialId,TrialSite,PersonId,ResponseTaskId))
+
+CREATE INDEX idx_DIR_ClinId_VisitId ON DataItemResponse (ClinicalTrialId,VisitId)
+
+CREATE INDEX idx_DIR_ClinId_CRFPAgeId ON DataItemResponse (ClinicalTrialId,CRFPageId)
+
+CREATE INDEX idx_DIR_ClinId_DataItemId ON DataItemResponse (ClinicalTrialId,DataItemId)
+
+CREATE INDEX idx_DIR_UserName ON DataItemResponse (UserName)
+
+CREATE TABLE DataItemResponseHistory ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, ResponseTaskId INTEGER, ResponseTimeStamp NUMERIC(16,10), VisitId INTEGER, CRFPageId INTEGER, CRFElementId SMALLINT, DataItemId INTEGER, VisitCycleNumber SMALLINT, CRFPageCycleNumber SMALLINT, CRFPageTaskId INTEGER, ResponseValue VARCHAR(255), ValueCode VARCHAR(15), UserName VARCHAR(20), UnitOfMeasurement VARCHAR(15), Comments VARCHAR(255), ResponseStatus SMALLINT, Changed SMALLINT, SoftwareVersion VARCHAR(15), ReasonForChange VARCHAR(255), LockStatus TINYINT, ImportTimeStamp NUMERIC(16,10), ValidationId SMALLINT, ValidationMessage VARCHAR(2000), OverruleReason VARCHAR(255), LabResult VARCHAR(1), CTCGrade SMALLINT, ClinicalTestDate NUMERIC(16,10), LaboratoryCode VARCHAR(15), HadValue SMALLINT, CONSTRAINT PKDataItemResponseHistory PRIMARY KEY (ClinicalTrialId,TrialSite,PersonId,ResponseTaskId,ResponseTimeStamp))
+
+CREATE INDEX idx_DIRH_ClinId_VisitId ON DataItemResponseHistory (ClinicalTrialId,VisitId)
+
+CREATE INDEX idx_DIRH_ClinId_CRFPageId ON DataItemResponseHistory (ClinicalTrialId,CRFPageId)
+
+CREATE INDEX idx_DIRH_ClinId_DataItemId ON DataItemResponseHistory (ClinicalTrialId,DataItemId)
+
+CREATE INDEX idx_DIRH_UserName ON DataItemResponseHistory (UserName)
+
+CREATE TABLE DataItemValidation ( ClinicalTrialId INTEGER, VersionId SMALLINT, DataItemId INTEGER, ValidationId SMALLINT, ValidationTypeId SMALLINT, DataItemValidation VARCHAR(2000), ValidationMessage VARCHAR(2000), CONSTRAINT PKDataItemValidation PRIMARY KEY (ClinicalTrialId,DataItemId,ValidationId,VersionId))
+
+CREATE TABLE DataType ( DataTypeId INTEGER, DataTypeName VARCHAR(15), CONSTRAINT PKDataType PRIMARY KEY (DataTypeId))
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (0,'Text')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (1,'Category')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (2,'Integer Number')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (3,'Real Number')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (4,'Date/Time')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (5,'Multimedia')
+
+INSERT INTO DataType (DataTypeId,DataTypeName) VALUES (6,'Laboratory Test')
+
+CREATE TABLE Eligibility ( ClinicalTrialId INTEGER, VersionId SMALLINT, EligibilityCode VARCHAR(15), RandomisationCode VARCHAR(15), Flag SMALLINT, Condition VARCHAR(2000), CONSTRAINT PKEligibility PRIMARY KEY (ClinicalTrialId,EligibilityCode,VersionId))
+
+CREATE TABLE Keyword ( Keyword VARCHAR(50), CONSTRAINT PKKeyword PRIMARY KEY (Keyword))
+
+INSERT INTO Keyword (Keyword) VALUES ('ABS')
+
+INSERT INTO Keyword (Keyword) VALUES ('ABSOLUTE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ACCESS')
+
+INSERT INTO Keyword (Keyword) VALUES ('ACTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('ADA')
+
+INSERT INTO Keyword (Keyword) VALUES ('ADD')
+
+INSERT INTO Keyword (Keyword) VALUES ('AFTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('ALL')
+
+INSERT INTO Keyword (Keyword) VALUES ('ALLOCATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ALTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('AND')
+
+INSERT INTO Keyword (Keyword) VALUES ('ANY')
+
+INSERT INTO Keyword (Keyword) VALUES ('ARE')
+
+INSERT INTO Keyword (Keyword) VALUES ('AS')
+
+INSERT INTO Keyword (Keyword) VALUES ('ASC')
+
+INSERT INTO Keyword (Keyword) VALUES ('ASSERTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('AT')
+
+INSERT INTO Keyword (Keyword) VALUES ('AUDIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('AUTHORIZATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('AUTONUMBER')
+
+INSERT INTO Keyword (Keyword) VALUES ('AVG')
+
+INSERT INTO Keyword (Keyword) VALUES ('AVERAGE')
+
+INSERT INTO Keyword (Keyword) VALUES ('BEFORE')
+
+INSERT INTO Keyword (Keyword) VALUES ('BEGIN')
+
+INSERT INTO Keyword (Keyword) VALUES ('BETWEEN')
+
+INSERT INTO Keyword (Keyword) VALUES ('BIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('BIT_LENGTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('BOTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('BY')
+
+INSERT INTO Keyword (Keyword) VALUES ('BYTE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CASCADE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CASCADED')
+
+INSERT INTO Keyword (Keyword) VALUES ('CASE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CAST')
+
+INSERT INTO Keyword (Keyword) VALUES ('CATALOG')
+
+INSERT INTO Keyword (Keyword) VALUES ('CATEGORY')
+
+INSERT INTO Keyword (Keyword) VALUES ('CHAR')
+
+INSERT INTO Keyword (Keyword) VALUES ('CHAR_LENGTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('CHARACTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('CHARACTER_LENGTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('CHECK')
+
+INSERT INTO Keyword (Keyword) VALUES ('CLINICALTRIALID')
+
+INSERT INTO Keyword (Keyword) VALUES ('CLOSE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CLUSTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('COALESCE')
+
+INSERT INTO Keyword (Keyword) VALUES ('COLLATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('COLLATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('COLUMN')
+
+INSERT INTO Keyword (Keyword) VALUES ('COMMENT')
+
+INSERT INTO Keyword (Keyword) VALUES ('COMMIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('COMPRESS')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONNECT')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONNECTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONSTRAINT')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONSTRAINTS')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONTINUE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CONVERT')
+
+INSERT INTO Keyword (Keyword) VALUES ('CORRESPONDING')
+
+INSERT INTO Keyword (Keyword) VALUES ('COUNT')
+
+INSERT INTO Keyword (Keyword) VALUES ('CREATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CRFPAGECYCLENUMBER')
+
+INSERT INTO Keyword (Keyword) VALUES ('CRFPAGEID')
+
+INSERT INTO Keyword (Keyword) VALUES ('CROSS')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENCY')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENT')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENT_DATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENT_TIME')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENT_TIMESTAMP')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURRENT_USER')
+
+INSERT INTO Keyword (Keyword) VALUES ('CURSOR')
+
+INSERT INTO Keyword (Keyword) VALUES ('CYCLE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATE_AND_TIME')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATE_DIFF')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATEDIFF')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATENOW')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATEOF')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATEPART')
+
+INSERT INTO Keyword (Keyword) VALUES ('DATETIME')
+
+INSERT INTO Keyword (Keyword) VALUES ('DAY')
+
+INSERT INTO Keyword (Keyword) VALUES ('DAYS')
+
+INSERT INTO Keyword (Keyword) VALUES ('DEALLOCATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DEC')
+
+INSERT INTO Keyword (Keyword) VALUES ('DECIMAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('DECLARE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DEFAULT')
+
+INSERT INTO Keyword (Keyword) VALUES ('DEFERRABLE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DEFERRED')
+
+INSERT INTO Keyword (Keyword) VALUES ('DELETE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DESC')
+
+INSERT INTO Keyword (Keyword) VALUES ('DESCRIBE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DESCRIPTOR')
+
+INSERT INTO Keyword (Keyword) VALUES ('DIAGNOSTICS')
+
+INSERT INTO Keyword (Keyword) VALUES ('DISCONNECT')
+
+INSERT INTO Keyword (Keyword) VALUES ('DISTINCT')
+
+INSERT INTO Keyword (Keyword) VALUES ('DOMAIN')
+
+INSERT INTO Keyword (Keyword) VALUES ('DOUBLE')
+
+INSERT INTO Keyword (Keyword) VALUES ('DROP')
+
+INSERT INTO Keyword (Keyword) VALUES ('DURING')
+
+INSERT INTO Keyword (Keyword) VALUES ('DYNAMIC')
+
+INSERT INTO Keyword (Keyword) VALUES ('ELSE')
+
+INSERT INTO Keyword (Keyword) VALUES ('END')
+
+INSERT INTO Keyword (Keyword) VALUES ('END-EXEC')
+
+INSERT INTO Keyword (Keyword) VALUES ('ESCAPE')
+
+INSERT INTO Keyword (Keyword) VALUES ('EVERY')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXCEPT')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXCEPTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXCLUSIVE')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXEC')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXECUTE')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXISTS')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXTERNAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('EXTRACT')
+
+INSERT INTO Keyword (Keyword) VALUES ('FALSE')
+
+INSERT INTO Keyword (Keyword) VALUES ('FETCH')
+
+INSERT INTO Keyword (Keyword) VALUES ('FILE')
+
+INSERT INTO Keyword (Keyword) VALUES ('FIRST')
+
+INSERT INTO Keyword (Keyword) VALUES ('FLOAT')
+
+INSERT INTO Keyword (Keyword) VALUES ('FOR')
+
+INSERT INTO Keyword (Keyword) VALUES ('FOREIGN')
+
+INSERT INTO Keyword (Keyword) VALUES ('FORM')
+
+INSERT INTO Keyword (Keyword) VALUES ('FORMAT_DATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('FORTRAN')
+
+INSERT INTO Keyword (Keyword) VALUES ('FOUND')
+
+INSERT INTO Keyword (Keyword) VALUES ('FROM')
+
+INSERT INTO Keyword (Keyword) VALUES ('FULL')
+
+INSERT INTO Keyword (Keyword) VALUES ('GET')
+
+INSERT INTO Keyword (Keyword) VALUES ('GLOBAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('GO')
+
+INSERT INTO Keyword (Keyword) VALUES ('GOTO')
+
+INSERT INTO Keyword (Keyword) VALUES ('GRANT')
+
+INSERT INTO Keyword (Keyword) VALUES ('GROUP')
+
+INSERT INTO Keyword (Keyword) VALUES ('HAVING')
+
+INSERT INTO Keyword (Keyword) VALUES ('HOUR')
+
+INSERT INTO Keyword (Keyword) VALUES ('HOURS')
+
+INSERT INTO Keyword (Keyword) VALUES ('HYPERLINK')
+
+INSERT INTO Keyword (Keyword) VALUES ('IDENTIFIED')
+
+INSERT INTO Keyword (Keyword) VALUES ('IDENTITY')
+
+INSERT INTO Keyword (Keyword) VALUES ('IF')
+
+INSERT INTO Keyword (Keyword) VALUES ('IMMEDIATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('IN')
+
+INSERT INTO Keyword (Keyword) VALUES ('INCLUDE')
+
+INSERT INTO Keyword (Keyword) VALUES ('INCLUDES')
+
+INSERT INTO Keyword (Keyword) VALUES ('INCREMENT')
+
+INSERT INTO Keyword (Keyword) VALUES ('INDEX')
+
+INSERT INTO Keyword (Keyword) VALUES ('INDICATOR')
+
+INSERT INTO Keyword (Keyword) VALUES ('INITIAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('INITIALIZATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('INITIALLY')
+
+INSERT INTO Keyword (Keyword) VALUES ('INNER')
+
+INSERT INTO Keyword (Keyword) VALUES ('INPUT')
+
+INSERT INTO Keyword (Keyword) VALUES ('INSENSITIVE')
+
+INSERT INTO Keyword (Keyword) VALUES ('INSERT')
+
+INSERT INTO Keyword (Keyword) VALUES ('INT')
+
+INSERT INTO Keyword (Keyword) VALUES ('INTEGER')
+
+INSERT INTO Keyword (Keyword) VALUES ('INTERSECT')
+
+INSERT INTO Keyword (Keyword) VALUES ('INTERVAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('INTO')
+
+INSERT INTO Keyword (Keyword) VALUES ('IS')
+
+INSERT INTO Keyword (Keyword) VALUES ('ISAFTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('ISBEFORE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ISDURING')
+
+INSERT INTO Keyword (Keyword) VALUES ('ISKNOWN')
+
+INSERT INTO Keyword (Keyword) VALUES ('IS_KNOWN')
+
+INSERT INTO Keyword (Keyword) VALUES ('ISOLATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('JOIN')
+
+INSERT INTO Keyword (Keyword) VALUES ('KEY')
+
+INSERT INTO Keyword (Keyword) VALUES ('LANGUAGE')
+
+INSERT INTO Keyword (Keyword) VALUES ('LAST')
+
+INSERT INTO Keyword (Keyword) VALUES ('LEADING')
+
+INSERT INTO Keyword (Keyword) VALUES ('LEFT')
+
+INSERT INTO Keyword (Keyword) VALUES ('LEN')
+
+INSERT INTO Keyword (Keyword) VALUES ('LEVEL')
+
+INSERT INTO Keyword (Keyword) VALUES ('LIKE')
+
+INSERT INTO Keyword (Keyword) VALUES ('LOCAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('LOCK')
+
+INSERT INTO Keyword (Keyword) VALUES ('LONG')
+
+INSERT INTO Keyword (Keyword) VALUES ('LOWER')
+
+INSERT INTO Keyword (Keyword) VALUES ('MATCH')
+
+INSERT INTO Keyword (Keyword) VALUES ('MAX')
+
+INSERT INTO Keyword (Keyword) VALUES ('MAXEXTENTS')
+
+INSERT INTO Keyword (Keyword) VALUES ('MEMO')
+
+INSERT INTO Keyword (Keyword) VALUES ('META_PREDICATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('MIN')
+
+INSERT INTO Keyword (Keyword) VALUES ('MINUS')
+
+INSERT INTO Keyword (Keyword) VALUES ('MINUTE')
+
+INSERT INTO Keyword (Keyword) VALUES ('MINUTES')
+
+INSERT INTO Keyword (Keyword) VALUES ('MOD')
+
+INSERT INTO Keyword (Keyword) VALUES ('MODE')
+
+INSERT INTO Keyword (Keyword) VALUES ('MODIFY')
+
+INSERT INTO Keyword (Keyword) VALUES ('MODULE')
+
+INSERT INTO Keyword (Keyword) VALUES ('MONTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('MONTHS')
+
+INSERT INTO Keyword (Keyword) VALUES ('MULTIFILE')
+
+INSERT INTO Keyword (Keyword) VALUES ('NAME')
+
+INSERT INTO Keyword (Keyword) VALUES ('NAMES')
+
+INSERT INTO Keyword (Keyword) VALUES ('NATIONAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('NATURAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('NCHAR')
+
+INSERT INTO Keyword (Keyword) VALUES ('NETSUPPORT')
+
+INSERT INTO Keyword (Keyword) VALUES ('NEXT')
+
+INSERT INTO Keyword (Keyword) VALUES ('NO')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOAUDIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOCOMPRESS')
+
+INSERT INTO Keyword (Keyword) VALUES ('NONE')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOSPY')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOT')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOT_ONEOF')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOW')
+
+INSERT INTO Keyword (Keyword) VALUES ('NOWAIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('NULL')
+
+INSERT INTO Keyword (Keyword) VALUES ('NULLIF')
+
+INSERT INTO Keyword (Keyword) VALUES ('NUMBER')
+
+INSERT INTO Keyword (Keyword) VALUES ('NUMERIC')
+
+INSERT INTO Keyword (Keyword) VALUES ('OCTET_LENGTH')
+
+INSERT INTO Keyword (Keyword) VALUES ('OF')
+
+INSERT INTO Keyword (Keyword) VALUES ('OFFLINE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ON')
+
+INSERT INTO Keyword (Keyword) VALUES ('ONE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ONEOF')
+
+INSERT INTO Keyword (Keyword) VALUES ('ONLINE')
+
+INSERT INTO Keyword (Keyword) VALUES ('ONLY')
+
+INSERT INTO Keyword (Keyword) VALUES ('OPEN')
+
+INSERT INTO Keyword (Keyword) VALUES ('OPTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('OR')
+
+INSERT INTO Keyword (Keyword) VALUES ('ORDER')
+
+INSERT INTO Keyword (Keyword) VALUES ('OUTER')
+
+INSERT INTO Keyword (Keyword) VALUES ('OUTPUT')
+
+INSERT INTO Keyword (Keyword) VALUES ('OVERLAPS')
+
+INSERT INTO Keyword (Keyword) VALUES ('PAD')
+
+INSERT INTO Keyword (Keyword) VALUES ('PARTIAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('PASCAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('PASSWORD')
+
+INSERT INTO Keyword (Keyword) VALUES ('PCTFREE')
+
+INSERT INTO Keyword (Keyword) VALUES ('PERSONID')
+
+INSERT INTO Keyword (Keyword) VALUES ('POSITION')
+
+INSERT INTO Keyword (Keyword) VALUES ('PRECISION')
+
+INSERT INTO Keyword (Keyword) VALUES ('PREPARE')
+
+INSERT INTO Keyword (Keyword) VALUES ('PRESERVE')
+
+INSERT INTO Keyword (Keyword) VALUES ('PRIMARY')
+
+INSERT INTO Keyword (Keyword) VALUES ('PRIOR')
+
+INSERT INTO Keyword (Keyword) VALUES ('PRIVILEGES')
+
+INSERT INTO Keyword (Keyword) VALUES ('PROCEDURE')
+
+INSERT INTO Keyword (Keyword) VALUES ('PUBLIC')
+
+INSERT INTO Keyword (Keyword) VALUES ('Question')
+
+INSERT INTO Keyword (Keyword) VALUES ('RANDOMISATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('RAW')
+
+INSERT INTO Keyword (Keyword) VALUES ('READ')
+
+INSERT INTO Keyword (Keyword) VALUES ('REAL')
+
+INSERT INTO Keyword (Keyword) VALUES ('REFERENCES')
+
+INSERT INTO Keyword (Keyword) VALUES ('REGISTRATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('RELATIVE')
+
+INSERT INTO Keyword (Keyword) VALUES ('RENAME')
+
+INSERT INTO Keyword (Keyword) VALUES ('RESOURCE')
+
+INSERT INTO Keyword (Keyword) VALUES ('RESTRICT')
+
+INSERT INTO Keyword (Keyword) VALUES ('RESULT_OF')
+
+INSERT INTO Keyword (Keyword) VALUES ('REVOKE')
+
+INSERT INTO Keyword (Keyword) VALUES ('RIGHT')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROLLBACK')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROW')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROWID')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROWLABEL')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROWNUM')
+
+INSERT INTO Keyword (Keyword) VALUES ('ROWS')
+
+INSERT INTO Keyword (Keyword) VALUES ('SCHEMA')
+
+INSERT INTO Keyword (Keyword) VALUES ('SCROLL')
+
+INSERT INTO Keyword (Keyword) VALUES ('SECOND')
+
+INSERT INTO Keyword (Keyword) VALUES ('SECONDS')
+
+INSERT INTO Keyword (Keyword) VALUES ('SECTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('SELECT')
+
+INSERT INTO Keyword (Keyword) VALUES ('SESSION')
+
+INSERT INTO Keyword (Keyword) VALUES ('SESSION_USER')
+
+INSERT INTO Keyword (Keyword) VALUES ('SET')
+
+INSERT INTO Keyword (Keyword) VALUES ('SHARE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SITE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SIZE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SMALLINT')
+
+INSERT INTO Keyword (Keyword) VALUES ('SOME')
+
+INSERT INTO Keyword (Keyword) VALUES ('SPACE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SPY')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQL')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQLCA')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQLCODE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQLERROR')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQLSTATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQLWARNING')
+
+INSERT INTO Keyword (Keyword) VALUES ('SQRT')
+
+INSERT INTO Keyword (Keyword) VALUES ('START')
+
+INSERT INTO Keyword (Keyword) VALUES ('STATUS')
+
+INSERT INTO Keyword (Keyword) VALUES ('SUBSTRING')
+
+INSERT INTO Keyword (Keyword) VALUES ('SUCCESSFUL')
+
+INSERT INTO Keyword (Keyword) VALUES ('SUM')
+
+INSERT INTO Keyword (Keyword) VALUES ('SYNONYM')
+
+INSERT INTO Keyword (Keyword) VALUES ('SYSDATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('SYSTEM_USER')
+
+INSERT INTO Keyword (Keyword) VALUES ('TABLE')
+
+INSERT INTO Keyword (Keyword) VALUES ('TEMP')
+
+INSERT INTO Keyword (Keyword) VALUES ('TEMPORARY')
+
+INSERT INTO Keyword (Keyword) VALUES ('TEXT')
+
+INSERT INTO Keyword (Keyword) VALUES ('THEN')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIME')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIME_DIFF')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIMENOW')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIMESTAMP')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIMEZONE_HOUR')
+
+INSERT INTO Keyword (Keyword) VALUES ('TIMEZONE_MINUTE')
+
+INSERT INTO Keyword (Keyword) VALUES ('TINYINT')
+
+INSERT INTO Keyword (Keyword) VALUES ('TO')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRAILING')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRANSACTION')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRANSLATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRANSLATION')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRIGGER')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRIM')
+
+INSERT INTO Keyword (Keyword) VALUES ('TRUE')
+
+INSERT INTO Keyword (Keyword) VALUES ('UID')
+
+INSERT INTO Keyword (Keyword) VALUES ('UNION')
+
+INSERT INTO Keyword (Keyword) VALUES ('UNIQUE')
+
+INSERT INTO Keyword (Keyword) VALUES ('UNKNOWN')
+
+INSERT INTO Keyword (Keyword) VALUES ('UPDATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('UPPER')
+
+INSERT INTO Keyword (Keyword) VALUES ('USAGE')
+
+INSERT INTO Keyword (Keyword) VALUES ('USER')
+
+INSERT INTO Keyword (Keyword) VALUES ('USING')
+
+INSERT INTO Keyword (Keyword) VALUES ('VALIDATE')
+
+INSERT INTO Keyword (Keyword) VALUES ('VALUE')
+
+INSERT INTO Keyword (Keyword) VALUES ('VALUES')
+
+INSERT INTO Keyword (Keyword) VALUES ('VARCHAR')
+
+INSERT INTO Keyword (Keyword) VALUES ('VARCHAR2')
+
+INSERT INTO Keyword (Keyword) VALUES ('VARYING')
+
+INSERT INTO Keyword (Keyword) VALUES ('VIEW')
+
+INSERT INTO Keyword (Keyword) VALUES ('VISIT')
+
+INSERT INTO Keyword (Keyword) VALUES ('VISITCYCLENUMBER')
+
+INSERT INTO Keyword (Keyword) VALUES ('VISITID')
+
+INSERT INTO Keyword (Keyword) VALUES ('VOLATILE')
+
+INSERT INTO Keyword (Keyword) VALUES ('WEEK')
+
+INSERT INTO Keyword (Keyword) VALUES ('WEEKS')
+
+INSERT INTO Keyword (Keyword) VALUES ('WHEN')
+
+INSERT INTO Keyword (Keyword) VALUES ('WHENEVER')
+
+INSERT INTO Keyword (Keyword) VALUES ('WHERE')
+
+INSERT INTO Keyword (Keyword) VALUES ('WITH')
+
+INSERT INTO Keyword (Keyword) VALUES ('WORK')
+
+INSERT INTO Keyword (Keyword) VALUES ('WRITE')
+
+INSERT INTO Keyword (Keyword) VALUES ('YEAR')
+
+INSERT INTO Keyword (Keyword) VALUES ('YEARS')
+
+INSERT INTO Keyword (Keyword) VALUES ('YES')
+
+INSERT INTO Keyword (Keyword) VALUES ('YESNO')
+
+INSERT INTO Keyword (Keyword) VALUES ('ZONE')
+
+CREATE TABLE Laboratory ( LaboratoryCode VARCHAR(15), LaboratoryDescription VARCHAR(255), Site VARCHAR(8), Changed SMALLINT, CONSTRAINT PKLaboratory PRIMARY KEY (LaboratoryCode))
+
+CREATE TABLE LogDetails ( LogDateTime NUMERIC(16,10), LogNumber INTEGER, TaskId VARCHAR(50), LogMessage VARCHAR(255), UserName VARCHAR(20), CONSTRAINT PKLogDetials PRIMARY KEY (TaskId,LogDateTime,LogNumber))
+
+CREATE INDEX idx_LD_UserName ON LogDetails (UserName)
+
+CREATE TABLE MACROControl ( MACROVersion VARCHAR(15), BuildSubVersion VARCHAR(10), IdleTimeOut SMALLINT)
+
+INSERT INTO MACROControl (MACROVersion,BuildSubVersion,IdleTimeOut) VALUES ('2.2','21',300)
+
+CREATE TABLE MACROLock ( StudyId INTEGER, Site VARCHAR(8), SubjectId INTEGER, EFormInstanceId INTEGER, UserName VARCHAR(20), LockTimeStamp NUMERIC(16,10), Token VARCHAR(10), CONSTRAINT PKMACROLock PRIMARY KEY (StudyId,Site,SubjectId,EFormInstanceId))
+
+CREATE TABLE MACROTable ( TableName VARCHAR(30), SegmentId VARCHAR(3), STYDEF SMALLINT, PATRSP SMALLINT, LABDEF SMALLINT, CONSTRAINT PKMACROTable PRIMARY KEY (TableName))
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ArezzoToken','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('AutoImportControl','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ClinicalTest','620',1,0,1)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ClinicalTestGroup','610',1,0,1)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ClinicalTrial','001',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('CRFElement','140',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('CRFPage','130',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('CRFPageInstance','070',0,1,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('CTC','640',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('CTCScheme','630',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('DataItem','120',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('DataItemResponse','080',0,1,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('DataItemResponseHistory','090',0,1,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('DataItemValidation','125',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('DataType','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Eligibility','250',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Keyword','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Laboratory','001',0,0,1)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('LogDetails','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('MACROControl','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('MACROLock','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('MACROTable','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Message','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('MIMessage','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('NewDBColumn','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('NormalRange','030',0,0,1)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Protocols','300',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ReasonForChange','060',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('RequiredData','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('RSSubjectIdentifier','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('RSNextNumber','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('RSUniquenessCheck','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Site','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('SiteLaboratory','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('SiteUser','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StandardDataFormat','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyDefinition','030',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyDocument','040',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyReport','190',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyReportData','200',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyVisit','150',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('StudyVisitCRFPage','160',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('SubjectNumbering','270',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialOffice','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialPhase','510',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialSite','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialStatus','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialStatusHistory','050',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialSubject','040',0,1,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('TrialType','520',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('UniquenessCheck','260',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('UnitClasses','',0,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('UnitConversionFactors','560',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('Units','550',1,0,1)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ValidationAction','530',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ValidationType','540',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('ValueData','090',1,0,0)
+
+INSERT INTO MACROTable (TableName,SegmentId,STYDEF,PATRSP,LABDEF) VALUES ('VisitInstance','060',0,1,0)
+
+CREATE TABLE Message ( TrialSite VARCHAR(8), ClinicalTrialId INTEGER, MessageType SMALLINT, MessageTimeStamp NUMERIC(16,10), UserName VARCHAR(20), MessageBody VARCHAR(255), MessageParameters VARCHAR(255), MessageReceived SMALLINT, MessageDirection SMALLINT, MessageId INTEGER, CONSTRAINT PKMessage PRIMARY KEY (MessageId))
+
+CREATE INDEX idx_MES_TrialSite ON Message (TrialSite)
+
+CREATE TABLE MIMessage ( MIMessageId INTEGER, MIMessageSite VARCHAR(8), MIMessageSource SMALLINT, MIMessageType SMALLINT, MIMessageScope SMALLINT, MIMessageObjectId INTEGER, MIMessageObjectSource SMALLINT, MIMessagePriority SMALLINT, MIMessageTrialName VARCHAR(15), MIMessagePersonId INTEGER, MIMessageVisitId INTEGER, MIMessageVisitCycle SMALLINT, MIMessageCRFPageTaskId INTEGER, MIMessageResponseTaskId INTEGER, MIMessageResponseValue VARCHAR(255), MIMessageOCDiscrepancyId INTEGER, MIMessageCreated NUMERIC(16,10), MIMessageSent NUMERIC(16,10), MIMessageReceived NUMERIC(16,10), MIMessageHistory SMALLINT, MIMessageProcessed SMALLINT, MIMessageStatus SMALLINT, MIMessageText VARCHAR(255), MIMessageUserName VARCHAR(20), MIMessageUserNameFull VARCHAR(100), MIMessageResponseTimeStamp NUMERIC(16,10), CONSTRAINT PKMIMessage PRIMARY KEY (MIMessageId,MIMessageSite,MIMessageSource))
+
+CREATE INDEX idx_MIM_MIMessageUserName ON MIMessage (MIMessageUserName)
+
+CREATE INDEX idx_MIM_MIMessageObjectId ON MIMessage (MIMessageObjectId)
+
+CREATE TABLE NewDBColumn ( VersionMajor SMALLINT, VersionMinor SMALLINT, VersionRevision SMALLINT, TableName VARCHAR(30), ColumnName VARCHAR(30), ColumnOrder SMALLINT, DefaultValue VARCHAR(255), ChangeType VARCHAR(15), ColumnNumber SMALLINT, CONSTRAINT PKNewDBColumn PRIMARY KEY (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName))
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'CRFElement','ClinicalTestDate',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItem','ClinicalTestDate',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'StudyDefinition','CTCSchemeCode',1,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'StudyDefinition','DOBExpr',2,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'StudyDefinition','GenderExpr',3,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'Trialsubject','SubjectGender',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'CRFPageInstance','LaboratoryCode',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponse','LabResult',1,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponse','CTCGrade',2,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponse','ClinicalTestDate',3,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponseHistory','LabResult',1,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponseHistory','CTCGrade',2,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,4,'DataItemResponseHistory','ClinicalTestDate',3,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'TrialSubject','RegistrationStatus',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'MIMessage','MIMessageResponseTimeStamp',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'DataItemResponse','LaboratoryCode',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'DataItemResponseHistory','LaboratoryCode',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'StudyDefinition','RRServerType',1,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'StudyDefinition','RRHTTPAddress',2,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'StudyDefinition','RRUserName',3,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'StudyDefinition','RRPassword',4,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,1,13,'StudyDefinition','RRProxyServer',5,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'CRFPage','eFormDatePrompt',null,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'NewDBColumn','ChangeType',1,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'NewDBColumn','ColumnNumber',2,'#NULL#','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'CRFElement','DefaultValue',null,'#NULL#','DROPCOLUMN',28)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'CRFPageInstance','SDVStatus',1,'#NULL#','DROPCOLUMN',15)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'CRFPageInstance','ReviewStatus',2,'#NULL#','DROPCOLUMN',14)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItem','ExternalDataSource',1,'#NULL#','DROPCOLUMN',19)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItem','RequiredTrialTypeId',2,'#NULL#','DROPCOLUMN',16)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItem','Required',3,'#NULL#','DROPCOLUMN',15)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponse','SDVStatus',1,'#NULL#','DROPCOLUMN',25)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponse','ReviewStatus',2,'#NULL#','DROPCOLUMN',24)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponse','ReviewComment',3,'#NULL#','DROPCOLUMN',18)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponseHistory','SDVStatus',1,'#NULL#','DROPCOLUMN',25)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponseHistory','ReviewStatus',2,'#NULL#','DROPCOLUMN',24)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'DataItemResponseHistory','ReviewComment',3,'#NULL#','DROPCOLUMN',18)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'MACROControl','DateReference',null,'#NULL#','DROPCOLUMN',2)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'StudyReport','HideBlankRows',null,'#NULL#','DROPCOLUMN',4)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'StudyReportData','HideBlankRows',null,'#NULL#','DROPCOLUMN',4)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialOffice','TransferSchedule',null,'#NULL#','DROPCOLUMN',7)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','SDVStatus',1,'#NULL#','DROPCOLUMN',18)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','ReviewStatus',2,'#NULL#','DROPCOLUMN',17)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','Checksum',3,'#NULL#','DROPCOLUMN',15)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','Initials',4,'#NULL#','DROPCOLUMN',7)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','Surname',5,'#NULL#','DROPCOLUMN',6)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','Forename',6,'#NULL#','DROPCOLUMN',5)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'TrialSubject','SubjectIdentificationCode',7,'#NULL#','DROPCOLUMN',4)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'UnitConversionFactors','ConversionExpression',null,'#NULL#','DROPCOLUMN',5)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'ValueData','DefaultCat',null,'#NULL#','DROPCOLUMN',9)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'VisitInstance','SDVStatus',1,'#NULL#','DROPCOLUMN',12)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,1,'VisitInstance','ReviewStatus',2,'#NULL#','DROPCOLUMN',11)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,10,'DataItemResponse','HadValue',null,'1','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,10,'DataItemResponseHistory','HadValue',null,'1','NEWCOLUMN',null)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,10,'ClinicalTrial','ActualRecruitment',null,'#NULL#','DROPCOLUMN',8)
+
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (2,2,10,'TrialSite','TrialSiteActualRecruitment',null,'#NULL#','DROPCOLUMN',3)
+
+CREATE TABLE NormalRange ( NormalRangeId INTEGER, LaboratoryCode VARCHAR(15), ClinicalTestCode VARCHAR(15), NormalRangeGender SMALLINT, NormalRangeAgeMin SMALLINT, NormalRangeAgeMax SMALLINT, NormalRangeEffectiveStart NUMERIC(16,10), NormalRangeEffectiveEnd NUMERIC(16,10), NormalRangeNormalMin DECIMAL(16,10), NormalRangeNormalMax DECIMAL(16,10), NormalRangeFeasibleMin DECIMAL(16,10), NormalRangeFeasibleMax DECIMAL(16,10), NormalRangeAbsoluteMin DECIMAL(16,10), NormalRangeAbsoluteMax DECIMAL(16,10), NormalRangePercent SMALLINT, CONSTRAINT PKNormalRange PRIMARY KEY (LaboratoryCode,NormalRangeId))
+
+CREATE INDEX idx_NR_ClinicalTestCode ON NormalRange (ClinicalTestCode)
+
+CREATE TABLE Protocols ( FileName VARCHAR(50), ProtocolName VARCHAR(50), Version VARCHAR(50), Description VARCHAR(2000), Author VARCHAR(50), Created NUMERIC(16,10), Modified NUMERIC(16,10), ArezzoVersion VARCHAR(50), InUse SMALLINT, ArezzoFile TEXT, CONSTRAINT PKProtocols PRIMARY KEY (FileName))
+
+INSERT INTO Protocols (FileName,ProtocolName,Version,Description,Author,Created,Modified,ArezzoVersion,InUse,ArezzoFile) VALUES ('Library','Library','1','This Protocol is the library','InferMed Ltd',36523.0 ,36523.0 ,'2.1',0,'''CLM FILE''(1998,4). clma_guideline(10000). clma_task(10000,`library`,plan,`Library`). clma_task_attr(10000,caption,''Library'',`Library`). clma_locked(10000). clma_key(10001). ')
+
+CREATE TABLE ReasonForChange ( ClinicalTrialId INTEGER, VersionId SMALLINT, ReasonForChangeId SMALLINT, ReasonForChange VARCHAR(255), CONSTRAINT PKReasonForChange PRIMARY KEY (ClinicalTrialId,VersionId,ReasonForChangeId))
+
+CREATE TABLE RequiredData ( DataItemId INTEGER, TrialTypeId SMALLINT, CONSTRAINT PKRequiredData PRIMARY KEY (DataItemId,TrialTypeId))
+
+CREATE TABLE RSNextNumber ( ClinicalTrialName VARCHAR(15), NextNumberId INTEGER, Prefix VARCHAR(255), Suffix VARCHAR(255), NextNumber INTEGER, CONSTRAINT PKRSNextNumber PRIMARY KEY (ClinicalTrialName,NextNumberId))
+
+CREATE TABLE RSSubjectIdentifier ( ClinicalTrialName VARCHAR(15), TrialSite VARCHAR(8), PersonId INTEGER, SubjectIdentifier VARCHAR(255), CONSTRAINT PKRSSubjectIdentifier PRIMARY KEY (ClinicalTrialName,TrialSite,PersonId))
+
+CREATE TABLE RSUniquenessCheck ( ClinicalTrialName VARCHAR(15), TrialSite VARCHAR(8), PersonId INTEGER, CheckCode VARCHAR(15), CheckValue VARCHAR(255), CheckTimeStamp NUMERIC(16,10), CONSTRAINT PKRSUniquenessCheck PRIMARY KEY (ClinicalTrialName,TrialSite,PersonId,CheckCode))
+
+CREATE TABLE Site ( Site VARCHAR(8), SiteDescription VARCHAR(255), SiteStatus SMALLINT, CONSTRAINT PKSite PRIMARY KEY (Site))
+
+CREATE TABLE SiteLaboratory ( Site VARCHAR(8), LaboratoryCode VARCHAR(15), CONSTRAINT PKSiteLaboratory PRIMARY KEY (Site,LaboratoryCode))
+
+CREATE TABLE SiteUser ( Site VARCHAR(8), UserName VARCHAR(20), CONSTRAINT PKSiteUser PRIMARY KEY (Site,UserName))
+
+CREATE TABLE StandardDataFormat ( StandardDataFormatId SMALLINT, DataFormat VARCHAR(255), DataTypeId SMALLINT, CONSTRAINT DataFormat UNIQUE (DataFormat), CONSTRAINT PKStandardDataFormat PRIMARY KEY (StandardDataFormatId))
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (1,0,'AA99AA')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (2,0,'AAAAA')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (4,2,'9999')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (5,2,'99')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (6,3,'99.99')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (7,3,'99.999')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (8,3,'9.999')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (9,3,'.999')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (10,4,'dd/mm/yyyy')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (11,4,'mm/dd/yyyy')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (12,4,'hh:mm')
+
+INSERT INTO StandardDataFormat (StandardDataFormatId,DataTypeId,DataFormat) VALUES (13,4,'hh:mm:ss')
+
+CREATE TABLE StudyDefinition ( ClinicalTrialId INTEGER, VersionId SMALLINT, DefaultFontColour INTEGER, DefaultCRFPageColour INTEGER, DefaultFontName VARCHAR(50), DefaultFontBold SMALLINT, DefaultFontItalic SMALLINT, DefaultFontSize SMALLINT, UserName VARCHAR(20), StudyDefinitionTimeStamp NUMERIC(16,10), TrialSubjectLabel VARCHAR(255), LocalTrialSubjectLabel SMALLINT, StandardDateFormat VARCHAR(50), StandardTimeFormat VARCHAR(50), SingleUseDataItems SMALLINT, CTCSchemeCode VARCHAR(15), DOBExpr VARCHAR(2000), GenderExpr VARCHAR(2000), RRServerType SMALLINT, RRHTTPAddress VARCHAR(255), RRUserName VARCHAR(20), RRPassword VARCHAR(50), RRProxyServer VARCHAR(255), CONSTRAINT PKStudyDefinition PRIMARY KEY (ClinicalTrialId,VersionId))
+
+INSERT INTO StudyDefinition (ClinicalTrialId,VersionId,DefaultFontColour,DefaultCRFPageColour,DefaultFontName,DefaultFontBold,DefaultFontItalic,DefaultFontSize,UserName,StudyDefinitionTimestamp,TrialSubjectLabel,LocalTrialSubjectLabel,StandardDateFormat,StandardTimeFormat,SingleUseDataItems) VALUES (0,0,-2147483630,12632256,'Arial',0,0,10,'InferMed',36525.0,'',0,'','',0)
+
+CREATE TABLE StudyDocument ( ClinicalTrialId INTEGER, VersionId SMALLINT, DocumentId SMALLINT, DocumentPath VARCHAR(255), CONSTRAINT PKStudyDocument PRIMARY KEY (ClinicalTrialId,DocumentId,VersionId))
+
+CREATE TABLE StudyReport ( ClinicalTrialId INTEGER, VersionId SMALLINT, ReportId SMALLINT, ReportName VARCHAR(255), ReportType SMALLINT, AutomaticNumbering SMALLINT, CONSTRAINT PKStudyReport PRIMARY KEY (ClinicalTrialId,ReportId,VersionId))
+
+CREATE TABLE StudyReportData ( ClinicalTrialId INTEGER, VersionId SMALLINT, ReportId SMALLINT, ReportLineId SMALLINT, SegmentId INTEGER, SequenceNumber INTEGER, VisitId INTEGER, CRFPageId INTEGER, DataItemId INTEGER, CRFElementId SMALLINT, SegmentText VARCHAR(255), CONSTRAINT PKStudyReportData PRIMARY KEY (ClinicalTrialId,ReportId,ReportLineId,SegmentId,VersionId))
+
+CREATE TABLE StudyVisit ( ClinicalTrialId INTEGER, VersionId SMALLINT, VisitId INTEGER, VisitName VARCHAR(50), VisitOrder SMALLINT, VisitCode VARCHAR(15), VisitDateLabel VARCHAR(255), VisitBackgroundColour INTEGER, VisitDatePrompt TINYINT, CONSTRAINT PKStudyVisit PRIMARY KEY (ClinicalTrialId,VisitId,VersionId))
+
+CREATE INDEX idx_SV_VisitCode ON StudyVisit (VisitCode)
+
+CREATE TABLE StudyVisitCRFPage ( ClinicalTrialId INTEGER, VersionId SMALLINT, VisitId INTEGER, CRFPageId INTEGER, Repeating SMALLINT, CONSTRAINT PKStudyVisitCRFPage PRIMARY KEY (ClinicalTrialId,VisitId,CRFPageId,VersionId))
+
+CREATE TABLE SubjectNumbering ( ClinicalTrialId INTEGER, VersionId SMALLINT, StartNumber INTEGER, NumberWidth SMALLINT, Prefix VARCHAR(2000), UsePrefix SMALLINT, Suffix VARCHAR(2000), UseSuffix SMALLINT, TriggerVisitId INTEGER, TriggerFormId INTEGER, UseRegistration SMALLINT, CONSTRAINT PKSubjectNumbering PRIMARY KEY (ClinicalTrialId,VersionId))
+
+CREATE TABLE TrialOffice ( TrialOffice VARCHAR(50), EffectiveFrom NUMERIC(16,10), EffectiveTo NUMERIC(16,10), HTTPAddress VARCHAR(255), Site VARCHAR(8), TransferData SMALLINT, UserName VARCHAR(50), UserPassword VARCHAR(50), PortNumber SMALLINT, ProxyServer VARCHAR(255), CONSTRAINT PKTrialOffice PRIMARY KEY (TrialOffice,EffectiveFrom,EffectiveTo))
+
+CREATE TABLE TrialPhase ( PhaseId SMALLINT, PhaseName VARCHAR(50), CONSTRAINT PKTrialPhase PRIMARY KEY (PhaseId))
+
+INSERT INTO TrialPhase (PhaseId,PhaseName) VALUES (1,'I')
+
+INSERT INTO TrialPhase (PhaseId,PhaseName) VALUES (2,'II')
+
+INSERT INTO TrialPhase (PhaseId,PhaseName) VALUES (3,'III')
+
+INSERT INTO TrialPhase (PhaseId,PhaseName) VALUES (4,'IV')
+
+CREATE TABLE TrialSite ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), CONSTRAINT PKTrialSite PRIMARY KEY (ClinicalTrialId,TrialSite))
+
+CREATE TABLE TrialStatus ( StatusId SMALLINT, StatusName VARCHAR(50), CONSTRAINT StatusName UNIQUE (StatusName), CONSTRAINT PKTrialStatus PRIMARY KEY (StatusId))
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (1,'In preparation')
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (2,'Open')
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (3,'Closed to recruitment')
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (4,'Closed to follow up')
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (5,'Suspended')
+
+INSERT INTO TrialStatus (StatusId,StatusName) VALUES (6,'Deleted')
+
+CREATE TABLE TrialStatusHistory ( ClinicalTrialId INTEGER, VersionId SMALLINT, TrialStatusChangeId SMALLINT, StatusId SMALLINT, UserName VARCHAR(20), StatusChangedTimestamp NUMERIC(16,10), CONSTRAINT PKTrialStatusHistory PRIMARY KEY (ClinicalTrialId,TrialStatusChangeId,VersionId))
+
+CREATE TABLE TrialSubject ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, DateOfBirth NUMERIC(16,10), Gender VARCHAR(1), LocalIdentifier1 VARCHAR(50), LocalIdentifier2 VARCHAR(50), ProformaState TEXT, TrialSubjectStatus SMALLINT, Changed SMALLINT, LockStatus TINYINT, ImportTimeStamp NUMERIC(16,10), SubjectGender SMALLINT, RegistrationStatus SMALLINT, CONSTRAINT PKTrialSubject PRIMARY KEY (ClinicalTrialId,TrialSite,PersonId))
+
+CREATE INDEX idx_TS_LocalIdentifier1 ON TrialSubject (LocalIdentifier1)
+
+CREATE INDEX idx_TS_TrialSite ON TrialSubject (TrialSite)
+
+CREATE INDEX idx_TS_PersonId ON TrialSubject (PersonId)
+
+CREATE TABLE TrialType ( TrialTypeId SMALLINT, TrialTypeName VARCHAR(50), CONSTRAINT PKTrialType PRIMARY KEY (TrialTypeId))
+
+CREATE TABLE UniquenessCheck ( ClinicalTrialId INTEGER, VersionId SMALLINT, CheckCode VARCHAR(15), Expression VARCHAR(2000), CONSTRAINT PKUniquenessCheck PRIMARY KEY (ClinicalTrialId,CheckCode,VersionId))
+
+CREATE TABLE UnitClasses ( UnitClass VARCHAR(50), CONSTRAINT PKUnitClasses PRIMARY KEY (UnitClass))
+
+INSERT INTO UnitClasses (UnitClass) VALUES ('Individual')
+
+INSERT INTO UnitClasses (UnitClass) VALUES ('Length')
+
+INSERT INTO UnitClasses (UnitClass) VALUES ('Temperature')
+
+INSERT INTO UnitClasses (UnitClass) VALUES ('Volume')
+
+INSERT INTO UnitClasses (UnitClass) VALUES ('Weight')
+
+CREATE TABLE UnitConversionFactors ( FromUnit VARCHAR(15), ToUnit VARCHAR(15), ConversionFactor DECIMAL(16,10), UnitClass VARCHAR(50), CONSTRAINT PKUnitConversionFactors PRIMARY KEY (FromUnit,ToUnit))
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('cm','m',0.01,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('cm','mm',10,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('g','kg',0.001,'Weight')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('kg','g',1000,'Weight')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('km','m',1000,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('m','cm',100,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('m','mm',1000,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('mm','cm',0.1,'Length')
+
+INSERT INTO UnitConversionFactors (FromUnit,ToUnit,ConversionFactor,UnitClass) VALUES ('mm','m',0.001,'Length')
+
+CREATE TABLE Units ( Unit VARCHAR(15), UnitClass VARCHAR(50), CONSTRAINT PKUnits PRIMARY KEY (Unit))
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('cm','Length')
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('g','Weight')
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('kg','Weight')
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('km','Length')
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('m','Length')
+
+INSERT INTO Units (Unit,UnitClass) VALUES ('mm','Length')
+
+CREATE TABLE ValidationAction ( ValidationActionId SMALLINT, ValidationActionName VARCHAR(15), CONSTRAINT PKValidationAction PRIMARY KEY (ValidationActionId))
+
+INSERT INTO ValidationAction (ValidationActionId,ValidationActionName) VALUES (0,'Reject data if')
+
+INSERT INTO ValidationAction (ValidationActionId,ValidationActionName) VALUES (1,'Warn if')
+
+INSERT INTO ValidationAction (ValidationActionId,ValidationActionName) VALUES (2,'Flag if')
+
+CREATE TABLE ValidationType ( ValidationTypeId SMALLINT, ValidationTypeName VARCHAR(50), ValidationActionId SMALLINT, CONSTRAINT PKValidationType PRIMARY KEY (ValidationTypeId))
+
+INSERT INTO ValidationType (ValidationTypeId,ValidationTypeName,ValidationActionId) VALUES (0,'Reject data if',0)
+
+INSERT INTO ValidationType (ValidationTypeId,ValidationTypeName,ValidationActionId) VALUES (1,'Warn if',1)
+
+INSERT INTO ValidationType (ValidationTypeId,ValidationTypeName,ValidationActionId) VALUES (2,'Flag if',2)
+
+CREATE TABLE ValueData ( ClinicalTrialId INTEGER, VersionId SMALLINT, DataItemId INTEGER, ValueId SMALLINT, ValueCode VARCHAR(15), ItemValue VARCHAR(255), Active SMALLINT, ValueOrder SMALLINT, CONSTRAINT PKValueData PRIMARY KEY (ClinicalTrialId,DataItemId,ValueId,VersionId))
+
+CREATE TABLE VisitInstance ( ClinicalTrialId INTEGER, TrialSite VARCHAR(8), PersonId INTEGER, VisitTaskId INTEGER, VisitId INTEGER, VisitCycleNumber SMALLINT, VisitDate NUMERIC(16,10), VisitStatus SMALLINT, Changed SMALLINT, LockStatus TINYINT, ImportTimeStamp NUMERIC(16,10), CONSTRAINT PKVisitInstance PRIMARY KEY (ClinicalTrialId,TrialSite,PersonId,VisitTaskId))
+
+CREATE INDEX idx_VI_VisitId ON VisitInstance (VisitId)
+
+CREATE INDEX IDX_VI_SECONDARYKEY ON VisitInstance (ClinicalTrialId, TrialSite, PersonId, VisitId, VisitCycleNumber)
+

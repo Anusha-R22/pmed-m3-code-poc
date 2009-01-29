@@ -1,0 +1,65 @@
+<SCRIPT LANGUAGE="VBScript" RUNAT="Server">
+
+'==================================================================================================
+' 	Copyright:	InferMed Ltd. 1998. All Rights Reserved
+'	File:		global.asa
+'	Author: 	I Curtis
+'	Purpose: 	initialises application/session
+'==================================================================================================
+'	Revisions:
+'	ic 29/07/2002	changed dll reference for 3.0
+'	dph 17/06/2003	added web file version setting
+'   ic 26/02/2007   issue 2669, added logoff call
+'==================================================================================================
+
+Sub Application_OnStart
+	dim oIoObject
+	set oIoObject = server.CreateObject("MACROWWWIO30.clsWWW")
+	Application("asUSESSL") = oIoObject.GetSSLInfo()
+	Application("asHELPURL") = oIoObject.GetWebHelpURL()
+	Application("asDLLINFO") = oIoObject.GetVersionInfo()
+	Application("abUSESCI") = oIoObject.RtnUseSCIFlag()
+	Application("anWEBVERS") = oIoObject.GetWebVersionInfo()
+	set oIoObject = nothing
+	'dev. flag, line can be removed/value set to <> "true" to turn dev. environment off
+	Application("asDEV") = "false"
+	Application("asSTARTTIME") = now
+	Application("asName") = "InferMed MACRO"
+	Application("asCopyright") = "© InferMed Ltd 1998-2005 All Rights Reserved"
+End Sub
+
+Sub Application_OnEnd
+	dim oIoObject
+	set oIoObject = server.CreateObject("MACROWWWIO30.clsWWW")
+	oIoObject.ShutDownCacheManager
+	set oIoObject = nothing
+End Sub
+
+Sub Session_OnStart
+	Server.ScriptTimeOut = 10000
+	Session.Timeout = 20
+End Sub
+
+Sub Session_OnEnd
+	dim oIoObject
+	set oIoObject = Server.CreateObject("MACROWWWIO30.clsWWW")
+	
+	if ((Session("ssEFIToken") <> "") or (Session("ssVIToken") <> "")) then
+		if (Session("ssEFIToken") <> "") then
+			call oIoObject.UnlockASPInstance(Session("ssUser"),Session("ssEFIToken"))
+			Session("ssEFIToken") = ""
+		end if
+		if (Session("ssVIToken") <> "") then
+			call oIoObject.UnlockASPInstance(Session("ssUser"),Session("ssVIToken"))
+			Session("ssVIToken") = ""
+		end if
+	end if
+	
+	if (Session("ssUser") <> "") then
+	    oIoObject.LogOff(Session("ssUser"))
+	end if
+	
+	set oIo = nothing
+End Sub
+</SCRIPT>
+

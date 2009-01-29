@@ -1,0 +1,210 @@
+<VisualStudioProject>
+    <CSHARP
+        ProjectType = "Local"
+        ProductVersion = "7.10.3077"
+        SchemaVersion = "2.0"
+        ProjectGuid = "{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}"
+    >
+        <Build>
+            <Settings
+                ApplicationIcon = ""
+                AssemblyKeyContainerName = ""
+                AssemblyName = "MACROBufferBrowser"
+                AssemblyOriginatorKeyFile = ""
+                DefaultClientScript = "JScript"
+                DefaultHTMLPageLayout = "Grid"
+                DefaultTargetSchema = "IE50"
+                DelaySign = "false"
+                OutputType = "Library"
+                PreBuildEvent = ""
+                PostBuildEvent = ""
+                RootNamespace = "MACROBufferBrowser"
+                RunPostBuildEvent = "OnBuildSuccess"
+                StartupObject = ""
+            >
+                <Config
+                    Name = "Debug"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "DEBUG;TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "true"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "false"
+                    OutputPath = "bin\Debug\"
+                    RegisterForComInterop = "true"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+                <Config
+                    Name = "Release"
+                    AllowUnsafeBlocks = "false"
+                    BaseAddress = "285212672"
+                    CheckForOverflowUnderflow = "false"
+                    ConfigurationOverrideFile = ""
+                    DefineConstants = "TRACE"
+                    DocumentationFile = ""
+                    DebugSymbols = "false"
+                    FileAlignment = "4096"
+                    IncrementalBuild = "false"
+                    NoStdLib = "false"
+                    NoWarn = ""
+                    Optimize = "true"
+                    OutputPath = "bin\Release\"
+                    RegisterForComInterop = "false"
+                    RemoveIntegerChecks = "false"
+                    TreatWarningsAsErrors = "false"
+                    WarningLevel = "4"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.dll"
+                />
+                <Reference
+                    Name = "System.Data"
+                    AssemblyName = "System.Data"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.Data.dll"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                    HintPath = "..\..\..\..\WINDOWS\Microsoft.NET\Framework\v1.1.4322\System.XML.dll"
+                />
+                <Reference
+                    Name = "VBA"
+                    Guid = "{000204EF-0000-0000-C000-000000000046}"
+                    VersionMajor = "6"
+                    VersionMinor = "0"
+                    Lcid = "9"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "log4net"
+                    AssemblyName = "log4net"
+                    HintPath = "..\..\..\..\Program Files\log4net-1.2.9-beta\bin\net\1.1\release\log4net.dll"
+                />
+                <Reference
+                    Name = "IMEDDataAccess"
+                    AssemblyName = "IMEDDataAccess"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDDataAccess\bin\Debug\IMEDDataAccess.dll"
+                />
+                <Reference
+                    Name = "ADODB"
+                    Guid = "{00000206-0000-0010-8000-00AA006D2EA4}"
+                    VersionMajor = "2"
+                    VersionMinor = "6"
+                    Lcid = "0"
+                    WrapperTool = "primary"
+                />
+                <Reference
+                    Name = "MACROAPI"
+                    AssemblyName = "MACROAPI"
+                    HintPath = "..\..\dotnetapi\bin\Debug\MACROAPI.dll"
+                />
+                <Reference
+                    Name = "IMedALM5"
+                    Guid = "{AC91D735-04ED-4C67-B676-2B8C63DDEEA4}"
+                    VersionMajor = "2"
+                    VersionMinor = "5"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "MACROTimeZoneBS30"
+                    Guid = "{DBCF57FC-AD62-4D84-BC68-1CABE10E0141}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "IMEDSettings20"
+                    AssemblyName = "IMEDSettings20"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDSettings20\bin\Release\IMEDSettings20.dll"
+                />
+                <Reference
+                    Name = "MACROUserBS30"
+                    Guid = "{2222BDA1-8E33-474A-B3A4-D17C1269AB23}"
+                    VersionMajor = "1"
+                    VersionMinor = "0"
+                    Lcid = "0"
+                    WrapperTool = "tlbimp"
+                />
+                <Reference
+                    Name = "IMEDFunctions20"
+                    AssemblyName = "IMEDFunctions20"
+                    HintPath = "..\..\..\MACRO Dependencies\IMEDFunctions20\bin\Release\IMEDFunctions20.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "AssemblyInfo.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferBrowser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferDataBrowser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferDataBrowserSave.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferMACROUser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferSummary.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferTargetSelection.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "BufferTargetSelectionSave.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "IMACROBufferBrowser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "MACROBufferBrowser.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "SubjectData.cs"
+                    SubType = "Code"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </CSHARP>
+</VisualStudioProject>
+

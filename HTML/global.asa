@@ -1,0 +1,35 @@
+
+
+<SCRIPT LANGUAGE="VBScript" RUNAT="Server">
+'----------------------------------------------------------------------------------------'
+'   Copyright:  InferMed Ltd. 1998. All Rights Reserved
+'   File:       MACRO\HTML\Global.asa
+'   Author:     Andrew Newbigging.
+'   Purpose:    Sets up session variables and starts up Arezzo.
+'----------------------------------------------------------------------------------------'
+'	Revisions:
+'	Mo	23/11/00	Changes required for the Registration Server ASP
+'	ic	03/10/01	changed to new MACROWWWIO22 dll function call 
+'	REM 18/12/02	Changed to new MACROSysDataXfer30.dll function call		
+'	REM 19/02/03	Add TimeZone sesson variable
+'----------------------------------------------------------------------------------------'
+Sub Session_OnStart
+
+gsDatabase = "ora_server_rem"
+session("DataBaseDesc")=gsDatabase
+
+
+'REM 18/12/02 - Changed to use new MACROSysDataXfer30.dll
+dim oSysDataXfer
+set oSysDataXfer = server.CreateObject("MACROSysDataXfer30.SysDataXfer")
+session("strConn") = oSysDataXfer.MACRODBConnectionString(gsDatabase)
+set oSysDataXfer = nothing
+
+'REM 19/02/03	Add TimeZone sesson variable
+dim oTimeZone
+set oTimeZone = server.CreateObject("MACROTimeZoneBS30.Timezone")
+session("strTimeZone") = oTimeZone.TimezoneOffset
+set oTimeZone = nothing
+
+End Sub
+</SCRIPT>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE ODM SYSTEM "http://www.cdisc.org/dtd/ODM1-2-0.dtd">
+<ODM FileType="Transactional" FileOID="Test" CreationDateTime="20/09/2005 12:00:00">
+  <ClinicalData StudyOID="demostudy30" MetaDataVersionOID="1">
+    <SubjectData SubjectKey="DPH 1">
+      <SiteRef LocationOID="site1"/>
+      <StudyEventData StudyEventOID="screening" StudyEventRepeatKey="1">
+        <FormData FormOID="cover" FormRepeatKey="1">
+          <ItemGroupData ItemGroupOID="cover" ItemGroupRepeatKey="0">
+            <ItemData ItemOID="subject" Value="1">
+              <AuditRecord>
+                <UserRef UserOID=""/>
+                <LocationRef LocationOID=""/>
+                <DateTimeStamp>29/09/2005 13:30:00</DateTimeStamp>
+              </AuditRecord>
+            </ItemData>
+            <ItemData ItemOID="initials" Value="DPH"/>
+            <ItemData ItemOID="dobirth" Value="22/11/1971"/>
+            <ItemData ItemOID="sex" Value="Male"/>
+            <ItemData ItemOID="clinname1" Value="ALONGFIRSTNAMEP"/>
+            <ItemData ItemOID="clinname2" Value="ALONGSURNAMEPERSON"/>
+            <ItemData ItemOID="Covformdate" Value="30/06/2005"/>
+          </ItemGroupData>
+        </FormData>
+      </StudyEventData>
+    </SubjectData>
+  </ClinicalData>
+</ODM>

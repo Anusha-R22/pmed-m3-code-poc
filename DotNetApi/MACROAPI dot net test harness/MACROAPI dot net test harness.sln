@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MACROAPI dot net test harness", "MACROAPI dot net test harness.csproj", "{50BCF4AA-3028-459F-8E00-BD507932284F}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MACROAPI", "..\MACROAPI.csproj", "{ED0F28A2-29BF-4CAE-84AA-56793A5F6330}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{50BCF4AA-3028-459F-8E00-BD507932284F}.Debug.ActiveCfg = Debug|.NET
+		{50BCF4AA-3028-459F-8E00-BD507932284F}.Debug.Build.0 = Debug|.NET
+		{50BCF4AA-3028-459F-8E00-BD507932284F}.Release.ActiveCfg = Release|.NET
+		{50BCF4AA-3028-459F-8E00-BD507932284F}.Release.Build.0 = Release|.NET
+		{ED0F28A2-29BF-4CAE-84AA-56793A5F6330}.Debug.ActiveCfg = Debug|.NET
+		{ED0F28A2-29BF-4CAE-84AA-56793A5F6330}.Debug.Build.0 = Debug|.NET
+		{ED0F28A2-29BF-4CAE-84AA-56793A5F6330}.Release.ActiveCfg = Release|.NET
+		{ED0F28A2-29BF-4CAE-84AA-56793A5F6330}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

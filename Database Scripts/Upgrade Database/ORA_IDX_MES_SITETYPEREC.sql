@@ -1,0 +1,2 @@
+-- index to improve performance of messages in data transfer for Oracle Server databases (proposed for) patch 3.0.77
+CREATE INDEX IDX_MES_SITETYPEREC ON MESSAGE (TRIALSITE, MESSAGETYPE, MESSAGERECEIVED);

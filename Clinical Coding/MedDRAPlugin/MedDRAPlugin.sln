@@ -1,0 +1,21 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MedDRAPlugin", "MedDRAPlugin.csproj", "{9622D894-F6F0-4F7A-96AD-73C2A61B58CD}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{9622D894-F6F0-4F7A-96AD-73C2A61B58CD}.Debug.ActiveCfg = Debug|.NET
+		{9622D894-F6F0-4F7A-96AD-73C2A61B58CD}.Debug.Build.0 = Debug|.NET
+		{9622D894-F6F0-4F7A-96AD-73C2A61B58CD}.Release.ActiveCfg = Release|.NET
+		{9622D894-F6F0-4F7A-96AD-73C2A61B58CD}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

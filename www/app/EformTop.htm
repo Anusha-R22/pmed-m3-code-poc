@@ -1,0 +1,151 @@
+<html>
+<head>
+<!--r--><!--r-->
+<!--r--><link rel="stylesheet" HREF="../style/MACRO1.css" type="text/css"><!--r-->
+<!--r--><script language="javascript" src='../script/HoverButton1.js'></script><!--r-->
+<script language="javascript">
+
+	var sDel1="`";
+	var sDel2="|";
+	var undefined;
+	var pW=window.parent;
+	
+	function button_on (imgName)
+					 {
+                document[imgName].src = "../img/" + imgName + "on.gif";
+								}
+
+	function button_off (imgName)
+				 {
+                document[imgName].src = "../img/" + imgName + ".gif";			
+					}
+	function fnResize()
+	{
+		if (document.body.clientWidth>180)
+		{
+			document.all["divScroll"].style.width=(document.body.clientWidth-180)
+		}
+	}
+//<!--r-->
+window.onerror=fnError;
+function fnError(sMsg,sUrl,sLine)
+{
+	switch (sLine)
+	{
+		case 26:
+		case 27:
+			//resize before page has loaded, suppress error. NOTE any lines added to this file may alter the error line in this case statement
+			return true; break;
+		default:
+			//other error, let IE report as normal
+			return false;
+	}
+}
+	function fnKeyDown()
+	{
+		if ((event.keyCode<112)||(event.keyCode>123)) return;
+		event.returnValue=false;
+		event.keyCode=0;
+	}
+	document.onkeydown=fnKeyDown;
+	window.onresize=fnResize;
+	function fnContextMenu(){return false};
+	document.oncontextmenu=fnContextMenu;
+	function fnSave(sId)
+	{
+		window.parent.frames[2].fnSave(sId)
+	}
+	function fnClose()
+	{
+		window.parent.frames[2].fnCancel();
+	}
+	function fnPrint()
+	{
+		window.parent.frames[2].fnPrint();
+	}
+//<!--r-->
+	function fnPageLoaded()
+	{
+		fnInitialiseButton("divVisit","clsVisitHoverButton clsHoverButtonActive","clsVisitHoverButton clsHoverButtonInactive","clsVisitHoverButton clsHoverButtonSelected");
+	}
+	function fnLoadVisitBorder(sSubjectLabel,sVisitList,sSelectedVisitTaskId)
+	{
+		//call this to load menu
+		var sHtml;
+		var aItem;
+		var aList=sVisitList.split(sDel1);
+  		var osHTML=new Array();
+			
+		osHTML.push("<table width='100%' border='0' cellpadding='0' cellspacing='0'>");
+		//cell for label/text menu options table
+		osHTML.push("<tr height='20'>");
+		osHTML.push("<td colspan='2'>");
+		osHTML.push("<table width='100%' height='100%' cellpadding='0' cellspacing='0' border='0'>");
+		osHTML.push("<tr><td align='left'><table><tr><td><div class='clsScheduleEformBorder clsScheduleHeadingText'>"+sSubjectLabel+"</div></td></tr></table></td>");
+		osHTML.push("<td align='center' class='clsScheduleMenuLinkText'>");
+		// ATN 23/1/2003 - Print option removed from here.
+		// osHTML.push("<a href='javascript:fnPrint();'>Print</a>&nbsp;&nbsp;&nbsp;";
+		//osHTML.push("<a href='javascript:fnClose();'>Close</a>");
+		osHTML.push("</td></tr>");
+		osHTML.push("</table>");
+		osHTML.push("</td></tr>");
+		//spacer row
+		osHTML.push("<tr height='10'><td colspan='2'></td></tr>");
+		//cell for menu icons table
+		osHTML.push("<tr><td width='1%' align='center' valign='top'>");
+		osHTML.push("<table border='0' cellpadding='1' cellspacing='0'><tr>");
+		osHTML.push("<td width='5'>&nbsp;</td>");
+		osHTML.push("<td><a href='javascript:fnSave(\"m3\");' onmouseout=\"button_off('ico_return'); return true\" onmouseover=\"button_on('ico_return'); return true\"><img alt='Save and return' border='0' src='../img/ico_return.gif' name='ico_return'></a></td>");
+		osHTML.push("<td><a href='javascript:fnClose();' onmouseout=\"button_off('ico_cancel'); return true\" onmouseover=\"button_on('ico_cancel'); return true\"><img alt='Cancel and return' border='0' src='../img/ico_cancel.gif' name='ico_cancel'></a></td>");
+		osHTML.push("<td><a href='javascript:fnPrint();' onmouseout=\"button_off('ico_print'); return true\" onmouseover=\"button_on('ico_print'); return true\"><img alt='Print eForm' border='0' src='../img/ico_print.gif' name='ico_print'></a></td>");
+		osHTML.push("<td><a href='javascript:fnSave(\"m1\");' onmouseout=\"button_off('ico_back'); return true\" onmouseover=\"button_on('ico_back'); return true\"><img alt='Save and move to previous eForm' border='0' src='../img/ico_back.gif' name='ico_back'></a></td>");
+		osHTML.push("<td><a href='javascript:fnSave(\"m2\");' onmouseout=\"button_off('ico_forward'); return true\" onmouseover=\"button_on('ico_forward'); return true\"><img alt='Save and move to next eForm' border='0' src='../img/ico_forward.gif' name='ico_forward'></a></td>");
+		osHTML.push("<td width='1'>&nbsp;</td>");
+		osHTML.push("</tr></table>");
+		osHTML.push("</td>");
+		//cell for visit table
+		osHTML.push("<td><div id='divScroll' style='width:"+(document.all.divVisits.offsetWidth-180)+";overflow:auto'>");
+		osHTML.push("<table width='100%' height='100%' cellpadding='0' cellspacing='0'>");
+		//blue line
+		osHTML.push("<tr height='2'><td bgcolor='blue' colspan='"+aList.length+"'></td></tr>");
+		//down vs
+		osHTML.push("<tr height='3'>");
+		for (var nCol=0;nCol<aList.length;nCol++)
+		{
+			osHTML.push("<td valign='top' align='center'><img src='../img/v.gif'></td></td>");
+		}
+		osHTML.push("</tr>");
+		//visit names
+		osHTML.push("<tr height='20' class='clsScheduleVisitText'>");
+		for (nCol=0;nCol<aList.length;nCol++)
+		{
+			aItem=aList[nCol].split(sDel2);
+			osHTML.push("<td valign='top' align='center'>");
+			sHTML = (aItem[1]==sSelectedVisitTaskId)? "<div title='"+aItem[2]+"' id='divVisit' class='clsVisitHoverButton clsHoverButtonSelected'>"+aItem[0]+"</div>":"<div title='"+aItem[2]+"' onmouseout='javascript:fnSetButtonUnHover(this);' onclick='javascript:fnSave(\"v"+aItem[1]+"\");' onmouseover='javascript:fnSetButtonHover(this);' id='divVisit' class='clsVisitHoverButton clsHoverButtonInactive'>"+aItem[0]+"</div>";
+			osHTML.push(sHTML);
+			osHTML.push("</td>");
+		}
+		osHTML.push("</tr>");
+		osHTML.push("</div></td></tr>");
+		//spacer row
+		//osHTML.push("<tr height='10'><td colspan='2'></td></tr>");
+		osHTML.push("</table>");
+		document.all.divVisits.innerHTML=osHTML.join('');
+
+		fnPageLoaded();
+//<!--r-->		
+		//set the top frame to the height of the visit table
+		window.parent.document.all['f0'].rows=(document.all.divVisits.offsetHeight+2)+',*';
+//<!--r-->
+	}
+	function fnDisable()
+	{
+		document.all.divVisits.innerHTML="";
+	}
+</script>
+</head>
+<body class='clsScheduleBorder'>
+<div id="divVisits" ></div>
+</body>
+</html>
+	

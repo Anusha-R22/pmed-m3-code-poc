@@ -1,0 +1,142 @@
+Type=OleDll
+Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\WINNT\System32\STDOLE2.TLB#OLE Automation
+Reference=*\G{00000206-0000-0010-8000-00AA006D2EA4}#2.6#0#..\..\..\Program Files\InferMed\Arezzo 2i\msado15.dll#Microsoft ActiveX Data Objects 2.6 Library
+Reference=*\G{DBCF57FC-AD62-4D84-BC68-1CABE10E0141}#1.0#0#\MACROTimeZoneBS30.dll#MACRO Time Zone v3.0.82
+Class=LockFreeze; LF Source Code\LockFreeze.cls
+Module=libLibrary; ..\Source Code\libLibrary.bas
+Module=modLockFreeze; LF Source Code\modLockFreeze.bas
+Module=basEnumerations; ..\Source Code\basEnumerations.bas
+Class=LFMessage; LF Source Code\LFMessage.cls
+Class=LFObject; LF Source Code\LFObject.cls
+Startup="(None)"
+HelpFile=""
+Title="MACROLFBS"
+ExeName32="MACROLFBS30.dll"
+Command32=""
+Name="MACROLFBS30"
+HelpContextID="0"
+Description="MACRO Lock Freeze Business Services v3.0.82"
+CompatibleMode="2"
+CompatibleEXE32="LF Source Code\COMP_MACROLFBS30.dll"
+MajorVer=3
+MinorVer=0
+RevisionVer=82
+AutoIncrementVer=0
+ServerSupportFiles=0
+VersionComments="MACRO Lock Freeze Business Services v3.0.82"
+VersionCompanyName="InferMed Limited"
+VersionFileDescription="MACRO Lock Freeze Business Services v3.0.82"
+VersionProductName="MACRO"
+CompilationType=0
+OptimizationType=0
+FavorPentiumPro(tm)=0
+CodeViewDebugInfo=0
+NoAliasing=0
+BoundsCheck=0
+OverflowCheck=0
+FlPointCheck=0
+FDIVCheck=0
+UnroundedFP=0
+StartMode=1
+Unattended=0
+Retained=0
+ThreadPerObject=0
+MaxNumberOfThreads=1
+ThreadingModel=1
+DebugStartupOption=0
+VersionCompatible32="1"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MS Transaction Server]
+AutoRefresh=1

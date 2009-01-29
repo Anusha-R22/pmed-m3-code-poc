@@ -1,0 +1,176 @@
+<!-- © InferMed Ltd 1998-2001 All Rights Reserved -->
+<title>MACRO Warning</title>
+
+<body bgcolor="#FFFFFF" onload="javascript:pageLoaded();">
+<!-------------------------------------------------->
+	<div id="d_msg">
+		Message goes here...
+	</div>
+<!-------------------------------------------------->
+	<div id="d_inpV" align="center">
+		<form>
+			<input type="button" value="    OK    " onClick="retval('X'); return false;">
+		</form>
+	</div>
+<!-------------------------------------------------->
+	<div id="d_inpW" align="center">
+		<form name="d_user">
+			<table width="100%">
+				<tr>
+					<td align="left">
+						<input type="button" name="b_Overrule" value="Overrule..." onClick="fnOverRule(); return false;" >
+					</td>
+					<td align="right">
+						<input type="button" name="b_OK" value="    OK    " onClick="retval('R'); return false;">
+					</td>
+			</table>
+		</form>
+	</div>
+<!-------------------------------------------------->
+	<div id="d_dets" align="right">
+	</div>
+<!-------------------------------------------------->
+	<div id="d_Reason" align="center">
+	</div>
+<!-------------------------------------------------->
+	<div id="d_Getreason" align="right">
+		<br>
+		<hr align="center" width="90%">
+		<br>
+		Reason for overrule
+		<input type="text" maxlength="255" name="i_reason" size="50">
+		<br>
+		<input type="button" value="    OK    " onClick="fnCheckRFO();">
+		&nbsp;&nbsp;
+		<input type="button" value="Cancel" onClick="fnUnOverRule();">
+	</div>
+<!-------------------------------------------------->
+	<div id="d_hideW">
+		<input type="button" value="Show Details" onClick="fnShowDiv ('d_showW', 'd_dets');">
+		<br>
+	</div>
+<!-------------------------------------------------->
+	<div id="d_showW">
+		<input type="button" value="Hide Details " onClick="fnShowDiv ('d_hideW', 'd_dets');" size="200">
+		<br>
+		<br>
+		<hr align="center" width="90%">
+		<br>
+		<div id="d_expr">
+			JSVE expression will go here
+		</div>
+	</div>
+<!-------------------------------------------------->
+	<div id="d_empty">
+	</div>
+<!-------------------------------------------------->
+</body>
+
+<script language="javascript">
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function fnOverRule()
+{
+	fnShowDiv ('d_Getreason', 'd_Reason');
+	document.d_user.b_Overrule.disabled = true;
+	document.d_user.b_OK.disabled = true;
+}
+
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function fnUnOverRule()
+{
+//	fnShowDiv ('d_Reason', 'd_empty');
+	fnHideDiv ('d_Reason');
+	document.d_user.b_Overrule.disabled = false;
+	document.d_user.b_OK.disabled = false;
+}
+
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function pageLoaded()
+{
+	var	sArgs = window.dialogArguments.split("¬");
+	var	sMsg = sArgs[0];
+	var	sExpr = sArgs[1];
+	var	sType = sArgs[2];
+	fnHideDiv ('d_hideW');
+	fnHideDiv ('d_showW');
+	fnHideDiv ('d_Getreason');
+	fnShowDiv ('d_hideW', 'd_dets');
+	// Warning or Reject
+	if (sType == "W")
+	{
+		document.all.tags("div").d_msg.outerHTML='<br><p align="center"><b>MACRO warning:</b> <i>' + sMsg + '</i></p><hr align="center" width="90%">';
+	}
+	else
+	{
+		document.all.tags("div").d_msg.outerHTML='<br><p align="center"><b>MACRO Data Invalid:</b> <i>' + sMsg + '</i></p><hr align="center" width="90%">';
+	}
+	document.all.tags("div").d_expr.outerHTML='<div align="center"><i>' + sExpr + '</i></div>';
+	var	sInp;
+	if (sType == "W")
+	{
+		document.all.tags("div").d_inpV.outerHTML='';
+	}
+	else
+	{
+		document.all.tags("div").d_inpW.outerHTML='';
+	}
+
+	if (sType == "W")
+	{
+		this.returnValue="R";	// default to Re-Try - incase they close the window
+	}
+	else
+	{
+		this.returnValue="X";
+	}
+}
+
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function retval(sVal)
+{
+	sVal=sVal.replace(/\"/g, '\"');
+	sVal=sVal.replace(/\'/g, "\'");
+	sVal=sVal.replace(/\</g, "&lt;");
+	sVal=sVal.replace(/\>/g, "&gt;");
+
+	this.returnValue=sVal;
+	this.close();
+}
+
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function fnShowDiv (sFromID, sToID)
+{
+	document.all[sToID].innerHTML = document.all[sFromID].innerHTML;
+	document.all[sToID].style.visibility = "visible";
+}
+
+//--------------------------------------------------
+//
+//--------------------------------------------------
+function fnHideDiv (sID)
+{
+	document.all[sID].style.visibility = "hidden";
+}
+function fnCheckRFO()
+{
+	if (document.all.i_reason[0].value=="")
+	{
+		alert("You must enter an overrule reason");
+		document.all.i_reason[0].focus();
+	}
+	else
+	{
+		retval('O' + document.all.i_reason[0].value);
+	}
+}
+</script>

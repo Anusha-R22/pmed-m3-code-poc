@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\wsdl" http://localhost/loginwebservice/MACRODirectLogin.asmx?wsdl /namespace:InferMed.MACRO30.DirectLogin /out:DirectLoginClient.cs

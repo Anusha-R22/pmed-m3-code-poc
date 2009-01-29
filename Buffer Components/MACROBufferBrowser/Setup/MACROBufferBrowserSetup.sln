@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup.vdproj", "{C77C3939-3351-41E9-A0E9-3F1AC990DEC4}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MACROBufferBrowser", "..\MACROBufferBrowser.csproj", "{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{C77C3939-3351-41E9-A0E9-3F1AC990DEC4}.Debug.ActiveCfg = Debug
+		{C77C3939-3351-41E9-A0E9-3F1AC990DEC4}.Debug.Build.0 = Debug
+		{C77C3939-3351-41E9-A0E9-3F1AC990DEC4}.Release.ActiveCfg = Release
+		{C77C3939-3351-41E9-A0E9-3F1AC990DEC4}.Release.Build.0 = Release
+		{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}.Debug.ActiveCfg = Debug|.NET
+		{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}.Debug.Build.0 = Debug|.NET
+		{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}.Release.ActiveCfg = Release|.NET
+		{E8AF5FEF-2CB1-4906-867D-77A182F4FFE9}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

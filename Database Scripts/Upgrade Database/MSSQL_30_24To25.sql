@@ -1,0 +1,13 @@
+ALTER TABLE STUDYDEFINITION ADD AREZZOMEMORY VARCHAR(100);
+GO
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (3,0,25,'STUDYDEFINITION','AREZZOMEMORY',null,'#NULL#','NEWCOLUMN',null);
+UPDATE USERROLE SET ROLECODE = 'MACROUser' WHERE ROLECODE = 'MacroUser';
+UPDATE MACROControl SET BUILDSUBVERSION = '25';
+
+
+
+
+
+
+
+

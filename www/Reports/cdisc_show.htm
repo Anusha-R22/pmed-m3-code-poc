@@ -1,0 +1,16 @@
+<html>
+	<head>
+	<script language="javascript">
+		function ShowDoc()
+		{
+			// open window to the CDISC XML document
+			var oWin = window.open("cdisc_output.xml","newrepwin","location=no,menubar=yes,toolbar=no,scrollbars=yes")
+			oWin.focus();
+			// redirect original window back to home.asp
+			window.location="home.asp"
+		}
+	</script>
+	</head>
+	<body onload="ShowDoc();">
+	</body>
+</html>

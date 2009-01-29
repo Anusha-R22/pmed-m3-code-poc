@@ -1,0 +1,1 @@
+UPDATE SecurityControl SET BUILDSUBVERSION = '39';

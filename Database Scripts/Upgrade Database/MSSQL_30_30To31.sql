@@ -1,0 +1,6 @@
+ALTER TABLE DATAITEMRESPONSE ADD STANDARDVALUE DECIMAL(16,10);
+ALTER TABLE DATAITEMRESPONSEHISTORY ADD STANDARDVALUE DECIMAL(16,10);
+GO
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (3,0,31,'DATAITEMRESPONSE','STANDARDVALUE',null,'#NULL#','NEWCOLUMN',null);
+INSERT INTO NewDBColumn (VersionMajor,VersionMinor,VersionRevision,TableName,ColumnName,ColumnOrder,DefaultValue,ChangeType,ColumnNumber) VALUES (3,0,31,'DATAITEMRESPONSEHISTORY','STANDARDVALUE',null,'#NULL#','NEWCOLUMN',null);
+UPDATE MACROControl SET BUILDSUBVERSION = '31';

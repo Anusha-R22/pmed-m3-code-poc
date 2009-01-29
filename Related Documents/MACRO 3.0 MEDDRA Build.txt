@@ -1,0 +1,310 @@
+REM -------------------------------------------------------------------------------------------------
+REM Copyright: InferMed Ltd. 2002. All rights reserved.
+REM File: MACRO 3.0 Build.txt
+REM Author: Matthew Martin 01/07/2002
+REM Purpose: MACRO 3.0 Build Definition
+REM -------------------------------------------------------------------------------------------------
+REM Revisions:
+REM 	NCJ 19 Dec 02 - Added MACROLFBS
+REM 	NCJ 4 Mar 03 - Added Batch Validation module
+REM 	TA 7 Mar 03 - Added Oracle Clinical Discrepancy
+REM 	NCJ 25 Jun 03 - Changed order of compilation of RR and WWW
+REM 	NCJ 25 Oct 05 - Version for MEDDRA ONLY
+REM -------------------------------------------------------------------------------------------------
+
+REM Open Log file
+LOG MACRO 3.0 Build.log
+
+
+
+REM Specify Build Number
+MAJORVER 3
+MINORVER 0
+REVISION 73
+REM Get latest of main MACRO project
+PROJECT $/Macro/MACRO 3.0
+PATH ..
+REM GET
+
+
+REM Make OCXs... we want them compatible if possible
+COMPATIBLE TRUE
+
+REM MACRO Option Group
+PROJECT $/Macro/MACRO 3.0/User Controls
+PATH ..\User Controls
+VBP MACROOptionGroup.vbp
+SET Description "MACRO Option Group"
+MAKE
+
+
+REM TA 10/04/2003: MACROStatus no longer used
+
+REM MACRO Status
+REM PROJECT $/Macro/MACRO 3.0/User Controls
+REM PATH ..\User Controls
+REM VBP MACROStatus.vbp
+REM SET Description "MACRO Status"
+REM MAKE
+
+
+
+REM TA 31/10/2002: this is made compatible 'cos builder isn't finding the ref
+
+REM Time Zone class
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROTimeZone.vbp
+SET Description "MACRO Time Zone"
+MAKE
+
+
+
+REM Make DLLs...  undo compatibility
+REM For Build 50 we KEEP compatibility (NCJ Sept 03)
+REM And for Build 62 we KEEP compatibility (NCJ 28 Jan 04)
+REM NCJ 26 Jul 04 - Compatibility changed later for WWW dll for build 70
+REM NCJ 22 Nov 04 - Compatibility changed later for WWW dll and MIMsgBS for build 71
+
+COMPATIBLE TRUE
+
+
+REM Lock Data Services
+PROJECT $/Macro/MACRO 3.0/Data Components
+PATH ..\Data Components
+VBP MACROLockDS.vbp
+SET Description "MACRO Lock Data Services"
+MAKE
+
+REM Lock Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROLock.vbp
+SET Description "MACRO Lock Business Services"
+MAKE
+
+REM Data Entry State
+PROJECT $/Macro/MACRO 3.0/State Components
+PATH ..\State Components
+VBP MACRODEState.vbp
+SET Description "MACRO Data Entry State"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+REM Data Entry Data Services
+PROJECT $/Macro/MACRO 3.0/Data Components
+PATH ..\Data Components
+VBP MACRODEDS.vbp
+SET Description "MACRO Data Entry Data Services"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+REM Data Entry Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACRODEBS.vbp
+SET Description "MACRO Data Entry Business Services"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+REM MIMessage State
+PROJECT $/Macro/MACRO 3.0/State Components
+PATH ..\State Components
+VBP MACROMIMSGState.vbp
+SET Description "MACRO MIMessage State"
+MAKE
+
+REM MIMessage Data Services
+PROJECT $/Macro/MACRO 3.0/Data Components
+PATH ..\Data Components
+VBP MACROMIMSGDS.vbp
+SET Description "MACRO MIMessage Data Services"
+MAKE
+
+REM NCJ 5 Jul 05 - Compatibility changed to FALSE for MIMsg dll for build 72
+
+REM COMPATIBLE FALSE
+
+REM MIMessage Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROMIMsgBS.vbp
+SET Description "MACRO MIMessage Business Services"
+MAKE
+
+COMPATIBLE TRUE
+
+REM User Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROUserBS30.vbp
+SET Description "MACRO User Business Services"
+MAKE
+
+REM Data Browser Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACRODBBS.vbp
+SET Description "MACRO Data Browser Business Services"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+REM System Data Transfer
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROSysDataXfer.vbp
+SET Description "MACRO System Data Transfer"
+MAKE
+
+REM Lock Freeze Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROLFBS.vbp
+SET Description "MACRO Lock Freeze Business Services"
+MAKE
+
+REM Arezzo to JavaScript Conversion Business Services
+PROJECT $/Macro/MACRO 3.0/Business Components
+PATH ..\Business Components
+VBP MACROAZJSBS.vbp
+SET Description "MACRO Arezzo to JavaScript Conversion Business Services"
+MAKE
+
+REM Registration and Randomisation
+PROJECT $/Macro/MACRO 3.0
+PATH ..
+VBP MACRORegistration.vbp
+SET Description "MACRO Registration and Randomisation"
+SET CondComp "WebRDE = -1"
+MAKE
+
+REM Oc Discrepancies
+PROJECT $/Macro/MACRO 3.0
+PATH ..
+VBP MACROOCDisc30.vbp
+SET Description "MACRO Oracle Clinical Discrepancies Management"
+SET CondComp "WebRDE = -1"
+MAKE
+
+REM TA 4/9/02: added MACROIOEForm30.dll
+
+REM NCJ 5 July 05 - Compatibility changed to FALSE for Subject Cache, WWWIO dll for build 72
+
+COMPATIBLE FALSE
+
+REM Web Eform generation dll
+PROJECT $/Macro/MACRO 3.0/IO Components
+PATH ..\IO Components
+VBP MACROIOEform.vbp
+SET Description "MACRO Web EForm Generation"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+REM TA 2/8/02: added SCM, SCI and WWW
+
+COMPATIBLE TRUE
+
+REM Subject Cache Manager
+PROJECT $/Macro/MACRO 3.0/Subject Cache
+PATH ..\Subject Cache
+VBP MACROSCM.vbp
+SET Description "MACRO Subject Cache Manager"
+MAKE
+
+REM Subject Cache Interface
+VBP MACROSCI.vbp
+SET Description "MACRO Subject Cache Interface"
+MAKE
+
+
+REM Web Data Entry I/O Services
+PROJECT $/Macro/MACRO 3.0/IO Components
+PATH ..\IO Components
+VBP MACROWWWIO.vbp
+SET Description "MACRO Web Data Entry I/O Component"
+SET CondComp "CLINICALCODING = 1"
+MAKE
+
+COMPATIBLE TRUE
+
+
+REM Make executables...
+PROJECT $/Macro/MACRO 3.0
+PATH ..
+
+REM System Management
+VBP MACROSystemManagement.vbp
+SET Description "MACRO System Management"
+SET IconForm "frmMenu"
+SET CondComp "DevMode = 0 : SM = 1"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Study Definition
+VBP MACROStudyDefinition.vbp
+SET Description "MACRO Study Definition"
+SET IconForm "frmMenu"
+SET CondComp "CLINICALCODING = 1 : DevMode = 0 : SD = 1"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Data Management
+VBP MACRODataManagement.vbp
+SET Description "MACRO Data Management"
+SET IconForm "frmMenu"
+SET CondComp "CLINICALCODING = 1 : DevMode = 0 : DM = 1"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Create Data Views
+VBP MACROCreateDataViews.vbp
+SET Description "MACRO Create Data Views"
+SET IconForm "frmMenu"
+SET CondComp "DevMode = 0"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM AutoImport
+VBP MACROAutoImport.vbp
+SET Description "MACRO AutoImport"
+SET IconForm "frmMenu"
+SET CondComp "WebRDE = -1"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Query Module
+VBP MacroQuery.vbp
+SET Description "MACRO Query Module"
+SET IconForm "frmMenu"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Batch Data Entry Module
+VBP MacroBatchDataEntry.vbp
+SET Description "MACRO Batch Data Entry"
+SET IconForm "frmMenu"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Batch Validation Module
+VBP MacroBatchValidation.vbp
+SET Description "MACRO Batch Validation"
+SET IconForm "frmMenu"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+REM Utilities Module
+VBP MacroUtilities.vbp
+SET Description "MACRO Utilities"
+SET IconForm "frmMenu"
+SET VersionCompanyName "InferMed Limited"
+MAKE
+
+
+REM Update build number of executables to the same as we have just built
+REM REVISION 17
+REM VBP MACROStudyDefinition.vbp
+REM VBP MACRODataManagement.vbp
+REM VBP MACROCreateDataViews.vbp
+REM VBP MACROAutoImport.vbp
+REM VBP MacroQuery.vbp

@@ -1,0 +1,1 @@
+settingsfile=C:\Program Files\InferMed\MACRO 3.0\MACROUserSettings30.txt

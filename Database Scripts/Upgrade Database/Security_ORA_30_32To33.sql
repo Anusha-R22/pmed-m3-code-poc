@@ -1,0 +1,9 @@
+INSERT INTO MACROFunction (FunctionCode,MACROFunction) VALUES ('F1009','Access Batch Data Entry');
+
+INSERT INTO Rolefunction (RoleCode,FunctionCode) VALUES ('MACROUser','F1009');
+
+Insert INTO FunctionModule (FunctionCode,MACROModule) VALUES ('F1009','BD');
+
+ALTER TABLE DATABASES ADD REPORTSLOCATION VARCHAR2(255);
+
+UPDATE SECURITYCONTROL SET BUILDSUBVERSION = '33';
